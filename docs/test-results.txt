@@ -1,0 +1,70 @@
+
+> code-forge@0.0.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: missing evidence blocks every target
+ok 1 - missing evidence blocks every target
+  ---
+  duration_ms: 19.1935
+  type: 'test'
+  ...
+# Subtest: complete reviewed evidence satisfies all targets
+ok 2 - complete reviewed evidence satisfies all targets
+  ---
+  duration_ms: 10.0533
+  type: 'test'
+  ...
+# Subtest: failed core gate blocks all targets
+ok 3 - failed core gate blocks all targets
+  ---
+  duration_ms: 2.1934
+  type: 'test'
+  ...
+# Subtest: stale, missing, future and mismatched evidence cannot pass
+ok 4 - stale, missing, future and mismatched evidence cannot pass
+  ---
+  duration_ms: 2.7247
+  type: 'test'
+  ...
+# Subtest: platform deferral cannot enable that platform or verified learning
+ok 5 - platform deferral cannot enable that platform or verified learning
+  ---
+  duration_ms: 1.3744
+  type: 'test'
+  ...
+# Subtest: missing catalogue, identity, signoff and invalid target fail closed
+ok 6 - missing catalogue, identity, signoff and invalid target fail closed
+  ---
+  duration_ms: 1.8917
+  type: 'test'
+  ...
+# Subtest: misclassified or duplicated catalogue cannot bypass required gates
+ok 7 - misclassified or duplicated catalogue cannot bypass required gates
+  ---
+  duration_ms: 3.7415
+  type: 'test'
+  ...
+# (node:59276) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: account lifecycle, tenant isolation, durable workspaces and conflict protection
+ok 8 - account lifecycle, tenant isolation, durable workspaces and conflict protection
+  ---
+  duration_ms: 4006.1092
+  type: 'test'
+  ...
+# Subtest: production refuses a plaintext origin
+ok 9 - production refuses a plaintext origin
+  ---
+  duration_ms: 24.6066
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5975.0061

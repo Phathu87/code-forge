@@ -1,423 +1,123 @@
-import React, { useState, createContext, useContext, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import { Toaster } from "@/components/ui/toaster"
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClientInstance } from '@/lib/query-client'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import PageNotFound from './lib/PageNotFound';
+import { AuthProvider, useAuth } from '@/lib/AuthContext';
+import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import ScrollToTop from './components/ScrollToTop';
+import ProtectedRoute from '@/components/ProtectedRoute';
+import Login from '@/pages/Login';
+import Register from '@/pages/Register';
+import ForgotPassword from '@/pages/ForgotPassword';
+import ResetPassword from '@/pages/ResetPassword';
+import AppLayout from '@/components/AppLayout';
+import Dashboard from '@/pages/Dashboard';
+import Missions from '@/pages/Missions';
+import CodeLab from '@/pages/CodeLab';
+import Onboarding from '@/pages/Onboarding';
+import Skills from '@/pages/Skills';
+import Portfolio from '@/pages/Portfolio';
+import Learn from '@/pages/Learn';
+import Projects from '@/pages/Projects';
+import Leaderboard from '@/pages/Leaderboard';
+import Community from '@/pages/Community';
+import Integrity from '@/pages/Integrity';
+import VerificationUnavailable from '@/components/VerificationUnavailable';
+import Achievements from '@/pages/Achievements';
 
-// Languages and other constants
-const languages = [
-  { name: 'JavaScript', emoji: '🟨' },
-  { name: 'Python', emoji: '🐍' },
-  { name: 'Java', emoji: '☕' },
-  { name: 'C#', emoji: '🎯' },
-  { name: 'Go', emoji: '🐹' },
-  { name: 'Rust', emoji: '🦀' },
-  { name: 'TypeScript', emoji: '🔷' },
-];
+import Settings from '@/pages/Settings';
+import Roadmap from '@/pages/Roadmap';
+import Landing from '@/pages/Landing';
+import HowItWorks from '@/pages/HowItWorks';
+import FAQ from '@/pages/FAQ';
+import Help from '@/pages/Help';
+import Legal from '@/pages/Legal';
+import SystemStatus from '@/pages/Status';
+import Notifications from '@/pages/Notifications';
+import Admin from '@/pages/Admin';
+import SessionExpired from '@/pages/SessionExpired';
+import Maintenance from '@/pages/Maintenance';
+import PublicProfile from '@/pages/PublicProfile';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
-// LanguageContext
-const LanguageContext = createContext();
+const AuthenticatedApp = () => {
+  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
+
+  if (isLoadingPublicSettings || isLoadingAuth) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
+  if (authError) {
+    if (authError.type === 'user_not_registered') {
+      return <UserNotRegisteredError />;
+    } else if (authError.type === 'auth_required') {
+      navigateToLogin();
+      return null;
+    }
+  }
+
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/verify" element={<VerificationUnavailable />} />
+      <Route path="/" element={<Landing />} />
+      <Route path="/how-it-works" element={<HowItWorks />} />
+      <Route path="/faq" element={<FAQ />} />
+      <Route path="/help" element={<Help />} />
+      <Route path="/legal" element={<Legal />} />
+      <Route path="/status" element={<SystemStatus />} />
+      <Route path="/session-expired" element={<SessionExpired />} />
+      <Route path="/maintenance" element={<Maintenance />} />
+      <Route path="/portfolio/:username" element={<PublicProfile />} />
+      <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
+        <Route element={<AppLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/missions" element={<Missions />} />
+          <Route path="/code-lab" element={<CodeLab />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/learn" element={<Learn />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/integrity" element={<Integrity />} />
+          <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/achievements" element={<Achievements />} />
+          <Route path="/certificates" element={<VerificationUnavailable />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/admin" element={<Admin />} />
+        </Route>
+        <Route path="/onboarding" element={<Onboarding />} />
+      </Route>
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
+  );
+};
+
 
 function App() {
-  const [varOcg, setVarOcg] = useState(0);
-  const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
-  const [user, setUser] = useState(null);
-
-  const toggleLanguage = () => setVarOcg(prev => (prev + 1) % languages.length);
-  const toggleDarkMode = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    localStorage.setItem('darkMode', newMode);
-  };
-
-  const contextValue = {
-    favorite: languages[varOcg],
-    toggleLanguage,
-    toggleDarkMode,
-    darkMode,
-    user,
-    setUser,
-  };
-
   return (
-    <LanguageContext.Provider value={contextValue}>
-      <Router>
-        <div style={appStyle(darkMode)}>
-          <Header />
-          <main style={{ flex: 1, padding: '20px' }}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </Router>
-    </LanguageContext.Provider>
-  );
+    <AuthProvider>
+      <QueryClientProvider client={queryClientInstance}>
+        <Router><div className="border-b border-border bg-card p-2 text-center text-sm" role="note">Development preview. Accounts and workspaces save to your server. Execution, progress and certificates are not available yet.</div>
+          <ScrollToTop />
+          <ErrorBoundary>
+            <AuthenticatedApp />
+          </ErrorBoundary>
+        </Router>
+        <Toaster />
+      </QueryClientProvider>
+    </AuthProvider>
+  )
 }
 
-// Header Component
-function Header() {
-  const { darkMode, toggleDarkMode, user, setUser } = useContext(LanguageContext);
-  const navigate = useNavigate();
-
-  return (
-    <header style={headerStyle(darkMode)}>
-      <nav style={navStyle}>
-        <h1 style={{ fontSize: '1.5rem' }}>LanguageToggle</h1>
-        <div style={navActionsStyle}>
-          {!user ? (
-            <>
-              <button style={navButtonStyle} onClick={() => navigate('/signup')}>Sign Up</button>
-              <button style={navButtonStyle} onClick={() => navigate('/login')}>Login</button>
-            </>
-          ) : (
-           <>
-            <button style={navButtonStyle} onClick={() => navigate('/')}>Home</button>
-            <button style={navButtonStyle} onClick={() => navigate('/dashboard')}>Account</button>
-            <button style={navButtonStyle} onClick={() => {
-              localStorage.removeItem('user');
-              setUser(null);
-              navigate('/');
-            }}>Logout</button>
-          </>
-          )}
-          <button style={navButtonStyle} onClick={toggleDarkMode}>
-            {darkMode ? '☀️ Light' : '🌙 Dark'}
-          </button>
-        </div>
-      </nav>
-    </header>
-  );
-}
-
-// Main Section for Language Toggle
-function Home() {
-  const { favorite, toggleLanguage, darkMode } = useContext(LanguageContext);
-
-  return (
-    <div style={containerStyle}>
-      <p style={{ 
-        ...styles.text, 
-        color: darkMode ? 'white' : 'black' 
-      }}>
-        Favorite programming language:{' '}
-        <span style={styles.highlight}>
-          {favorite.emoji} {favorite.name}
-        </span>
-      </p>
-      <button onClick={toggleLanguage} style={buttonStyle}>
-        🔁 Toggle Language
-      </button>
-    </div>
-  );
-}
-
-
-// Signup Component
-function Signup() {
-  const { setUser } = useContext(LanguageContext);
-  const [form, setForm] = useState({ username: '', email: '', password: '' });
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    setError('');
-    setSuccess('');
-  };
-
-  const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const { username, email, password } = form;
-
-    if (!username || !email || !password) {
-      return setError('Please fill in all fields.');
-    }
-
-    if (!validateEmail(email)) {
-      return setError('Enter a valid email.');
-    }
-
-    // Save user to "localStorage" as a fake DB
-    localStorage.setItem('user', JSON.stringify({ username, email }));
-    setUser({ username, email });
-    setSuccess('Signup successful! Redirecting...');
-    setTimeout(() => navigate('/'), 1500);
-  };
-
-  return (
-    <div style={containerStyle}>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit} style={formStyle}>
-        <input name="username" placeholder="Username" value={form.username} onChange={handleChange} style={inputStyle} />
-        <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} style={inputStyle} />
-        <input name="password" type="password" placeholder="Password" value={form.password} onChange={handleChange} style={inputStyle} />
-        <button type="submit" style={buttonStyle}>Sign Up</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        {success && <p style={{ color: 'green' }}>{success}</p>}
-      </form>
-    </div>
-  );
-}
-
-// Login Component
-function Login() {
-  const { setUser } = useContext(LanguageContext);
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    setError('');
-    setSuccess('');
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const savedUser = JSON.parse(localStorage.getItem('user'));
-    const { email, password } = form;
-
-    if (!email || !password) return setError('Please fill in all fields.');
-
-    if (!savedUser || savedUser.email !== email) {
-      return setError('User not found. Please sign up.');
-    }
-
-    // Fake password check (you can make this more advanced)
-    if (password.length < 4) return setError('Invalid password. Try at least 4 characters.');
-
-    setUser(savedUser);
-    setSuccess('Login successful! Redirecting...');
-    setTimeout(() => navigate('/'), 1500);
-  };
-
-  return (
-    <div style={containerStyle}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} style={formStyle}>
-        <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} style={inputStyle} />
-        <input name="password" type="password" placeholder="Password" value={form.password} onChange={handleChange} style={inputStyle} />
-        <button type="submit" style={buttonStyle}>Login</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        {success && <p style={{ color: 'green' }}>{success}</p>}
-      </form>
-    </div>
-  );
-}
-
-// Dashboard Component
-function Dashboard() {
-  const { user, setUser } = useContext(LanguageContext);
-  const [profile, setProfile] = useState(() => {
-    const saved = JSON.parse(localStorage.getItem('profile'));
-    return saved || {
-      fullName: '',
-      phone: '',
-      address: '',
-      profilePic: '',
-    };
-  });
-
-  const handleChange = (e) => {
-    setProfile({ ...profile, [e.target.name]: e.target.value });
-  };
-
-  const handleImageChange = (e) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      setProfile({ ...profile, profilePic: reader.result });
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
-
-  const handleSave = () => {
-    localStorage.setItem('profile', JSON.stringify(profile));
-    alert('Profile saved!');
-  };
-
-  if (!user) return <p style={containerStyle}>Please log in to view your dashboard.</p>;
-
-  return (
-    <div style={containerStyle}>
-      <h2>Your Dashboard</h2>
-      {profile.profilePic && (
-        <img src={profile.profilePic} alt="Profile" style={{ width: '120px', borderRadius: '50%', marginBottom: '20px' }} />
-      )}
-      <input type="file" accept="image/*" onChange={handleImageChange} style={{ marginBottom: '15px' }} />
-      <input name="fullName" placeholder="Full Name" value={profile.fullName} onChange={handleChange} style={inputStyle} />
-      <input name="phone" placeholder="Phone Number" value={profile.phone} onChange={handleChange} style={inputStyle} />
-      <input name="address" placeholder="Address" value={profile.address} onChange={handleChange} style={inputStyle} />
-      <button onClick={handleSave} style={buttonStyle}>Save Profile</button>
-    </div>
-  );
-}
-
-// Footer Component
-function Footer() {
-  const { darkMode } = useContext(LanguageContext);
-
-  const footerContainerStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    gap: '20px',
-    alignItems: 'center',
-    padding: '20px',
-    backgroundColor: darkMode ? '#34495e' : '#3498db',
-    color: 'white',
-    textAlign: 'left',
-  };
-
-  const leftColumnStyle = {
-    flex: '1',
-    minWidth: '250px',
-  };
-
-  const rightColumnStyle = {
-    flex: '1',
-    minWidth: '250px',
-  };
-
-  const linkStyle = {
-    color: 'white',
-    textDecoration: 'underline',
-  };
-
-  return (
-    <footer style={footerContainerStyle}>
-      <div style={leftColumnStyle}>
-        <p>&copy; 2025 LanguageToggle. All rights reserved</p>
-        <p>Made with 💻 by Phathutshedzo Rakhunwana</p>
-      </div>
-      <div style={rightColumnStyle}>
-        <p>
-          📧 Email:{' '}
-          <a href="mailto:phathu.rakhunwana@gmail.com" style={linkStyle}>
-            phathu.rakhunwana@gmail.com
-          </a>
-        </p>
-        <p>
-          💼 LinkedIn:{' '}
-          <a
-            href="https://www.linkedin.com/in/phathutshedzo-rakhunwana"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={linkStyle}
-          >
-            linkedin.com/in/phathutshedzo-rakhunwana
-          </a>
-        </p>
-      </div>
-    </footer>
-  );
-}
-
-
-const appStyle = (darkMode) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  minHeight: '100vh',
-  backgroundColor: darkMode ? '#2c3e50' : '#ecf0f1',
-});
-
-const headerStyle = (darkMode) => ({
-  backgroundColor: darkMode ? '#34495e' : '#3498db',
-  color: 'white',
-  padding: '10px 0',
-});
-
-const navStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  padding: '0 20px',
-  alignItems: 'center',
-};
-
-const navActionsStyle = {
-  display: 'flex',
-  alignItems: 'center',
-};
-
-const navButtonStyle = {
-  backgroundColor: '#2980b9',
-  color: 'white',
-  padding: '8px 12px',
-  borderRadius: '5px',
-  margin: '0 5px',
-  border: 'none',
-  cursor: 'pointer',
-};
-
-const containerStyle = {
-  textAlign: 'center',
-  margin: '20px auto',
-};
-
-const styles = {
-  text: {
-    fontSize: '18px',
-    fontWeight: 'bold',
-    
-  },
-  highlight: {
-    color: '#e74c3c',
-    fontWeight: 'bold',
-  },
-};
-
-const buttonStyle = {
-  backgroundColor: '#3498db',
-  color: 'white',
-  padding: '10px 20px',
-  borderRadius: '5px',
-  cursor: 'pointer',
-};
-
-const footerStyle = {
-  padding: '15px 10px',
-  backgroundColor: '#34495e',
-  color: 'white',
-  textAlign: 'center',
-};
-
-const footerContentStyle = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  justifyContent: 'center',
-  alignItems: 'center',
-  gap: '20px',
-  fontSize: '14px',
-};
-
-const linkStyle = {
-  color: 'white',
-  textDecoration: 'underline',
-};
-
-const formStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-};
-
-const inputStyle = {
-  marginBottom: '10px',
-  padding: '10px',
-  border: '1px solid #ccc',
-  borderRadius: '5px',
-};
-
-const container = document.getElementById('root');
-const root = createRoot(container);
-root.render(<App />);
-
-
-export default App;
+export default App

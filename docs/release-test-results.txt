@@ -1,0 +1,56 @@
+
+> code-forge@0.0.0 test:release
+> node --test tests/release-policy.test.mjs
+
+TAP version 13
+# Subtest: missing evidence blocks every target
+ok 1 - missing evidence blocks every target
+  ---
+  duration_ms: 23.4368
+  type: 'test'
+  ...
+# Subtest: complete reviewed evidence satisfies all targets
+ok 2 - complete reviewed evidence satisfies all targets
+  ---
+  duration_ms: 14.4354
+  type: 'test'
+  ...
+# Subtest: failed core gate blocks all targets
+ok 3 - failed core gate blocks all targets
+  ---
+  duration_ms: 2.3232
+  type: 'test'
+  ...
+# Subtest: stale, missing, future and mismatched evidence cannot pass
+ok 4 - stale, missing, future and mismatched evidence cannot pass
+  ---
+  duration_ms: 4.5107
+  type: 'test'
+  ...
+# Subtest: platform deferral cannot enable that platform or verified learning
+ok 5 - platform deferral cannot enable that platform or verified learning
+  ---
+  duration_ms: 1.9369
+  type: 'test'
+  ...
+# Subtest: missing catalogue, identity, signoff and invalid target fail closed
+ok 6 - missing catalogue, identity, signoff and invalid target fail closed
+  ---
+  duration_ms: 2.2573
+  type: 'test'
+  ...
+# Subtest: misclassified or duplicated catalogue cannot bypass required gates
+ok 7 - misclassified or duplicated catalogue cannot bypass required gates
+  ---
+  duration_ms: 3.7504
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4194.0406

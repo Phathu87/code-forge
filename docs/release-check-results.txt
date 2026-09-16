@@ -1,0 +1,28 @@
+
+> code-forge@0.0.0 release:check
+> node scripts/check-release.mjs web
+
+web: NOT READY
+258: BLOCK RELEASE - Product completeness
+259: BLOCK RELEASE - Core journey
+260: BLOCK RELEASE - Data persistence
+261: BLOCK RELEASE - Data-loss resilience
+262: BLOCK RELEASE - Authentication
+263: BLOCK RELEASE - Authorization
+264: BLOCK RELEASE - Execution sandbox
+265: BLOCK RELEASE - Preview isolation
+266: BLOCK RELEASE - Test engine
+267: BLOCK RELEASE - Progress and XP integrity
+268: BLOCK RELEASE - AI Code Coach
+269: BLOCK RELEASE - Privacy
+270: BLOCK RELEASE - Logging and secrets
+271: BLOCK RELEASE - Backups and restore
+272: BLOCK RELEASE - Observability
+273: BLOCK RELEASE - Performance
+274: BLOCK RELEASE - Accessibility
+275: BLOCK RELEASE - Responsiveness
+276: BLOCK RELEASE - Real devices
+277: BLOCK RELEASE - Legal and trust content
+278: BLOCK RELEASE - Support
+281: BLOCK RELEASE - App versioning
+Require evidence, artifact identity and engineering/security/operations/product sign-offs.

@@ -1,0 +1,200 @@
+[
+  {
+    "id": 258,
+    "name": "Product completeness",
+    "scope": "core",
+    "finding": "Account and workspace services work locally. Several learning screens still use demonstration data."
+  },
+  {
+    "id": 259,
+    "name": "Core journey",
+    "scope": "core",
+    "finding": "Account, edit, save and reload tested locally; execution, assessment and public project journey remain incomplete."
+  },
+  {
+    "id": 260,
+    "name": "Data persistence",
+    "scope": "core",
+    "finding": "SQLite workspace persistence passes logout/login and API restart tests. Other learner resources still lack production storage."
+  },
+  {
+    "id": 261,
+    "name": "Data-loss resilience",
+    "scope": "core",
+    "finding": "Local drafts and server revision conflicts implemented. Full network, device, crash and storage-quota matrix remains open."
+  },
+  {
+    "id": 262,
+    "name": "Authentication",
+    "scope": "core",
+    "finding": "Standalone sessions, verification and reset implemented and tested locally. SMTP delivery and production security review pending."
+  },
+  {
+    "id": 263,
+    "name": "Authorization",
+    "scope": "core",
+    "finding": "Workspace ownership and client role-edit rejection pass API tests. Future sensitive resources need separate authorization tests."
+  },
+  {
+    "id": 264,
+    "name": "Execution sandbox",
+    "scope": "core",
+    "finding": "No execution service or sandbox configuration in checkout."
+  },
+  {
+    "id": 265,
+    "name": "Preview isolation",
+    "scope": "core",
+    "finding": "Preview.jsx renders static example, not isolated learner execution."
+  },
+  {
+    "id": 266,
+    "name": "Test engine",
+    "scope": "core",
+    "finding": "Simulated test results removed from Code Lab; no execution runner is connected."
+  },
+  {
+    "id": 267,
+    "name": "Progress and XP integrity",
+    "scope": "core",
+    "finding": "Code Lab no longer awards simulated XP. Server progress service still required."
+  },
+  {
+    "id": 268,
+    "name": "AI Code Coach",
+    "scope": "core",
+    "finding": "CopilotPanel uses canned responses and keyword filtering."
+  },
+  {
+    "id": 269,
+    "name": "Privacy",
+    "scope": "core",
+    "finding": "Legal text is draft; Settings export uses a timer."
+  },
+  {
+    "id": 270,
+    "name": "Logging and secrets",
+    "scope": "core",
+    "finding": "Removed hosted SDK/plugin and environment bootstrap. Full production artifact and logging review still required."
+  },
+  {
+    "id": 271,
+    "name": "Backups and restore",
+    "scope": "core",
+    "finding": "No backup configuration or actual restore evidence supplied."
+  },
+  {
+    "id": 272,
+    "name": "Observability",
+    "scope": "core",
+    "finding": "No operational alert delivery evidence or named on-call owner supplied."
+  },
+  {
+    "id": 273,
+    "name": "Performance",
+    "scope": "core",
+    "finding": "No representative production measurements supplied."
+  },
+  {
+    "id": 274,
+    "name": "Accessibility",
+    "scope": "core",
+    "finding": "No critical-journey accessibility QA records supplied."
+  },
+  {
+    "id": 275,
+    "name": "Responsiveness",
+    "scope": "core",
+    "finding": "Responsive classes exist; no recorded viewport QA proves usability."
+  },
+  {
+    "id": 276,
+    "name": "Real devices",
+    "scope": "core",
+    "finding": "No release-candidate Android, Apple or Windows device test records."
+  },
+  {
+    "id": 277,
+    "name": "Legal and trust content",
+    "scope": "core",
+    "finding": "Legal.jsx contains draft policies awaiting review."
+  },
+  {
+    "id": 278,
+    "name": "Support",
+    "scope": "core",
+    "finding": "No support entity/function or delivery evidence locally."
+  },
+  {
+    "id": 279,
+    "name": "Store truthfulness",
+    "scope": "store",
+    "finding": "No exact packaged-build versus listing comparison supplied."
+  },
+  {
+    "id": 280,
+    "name": "Store metadata",
+    "scope": "store",
+    "finding": "No finalized store submission evidence supplied."
+  },
+  {
+    "id": 281,
+    "name": "App versioning",
+    "scope": "core",
+    "finding": "Original Git history restored at repository root. No deployed artifact identity or migration release approved."
+  },
+  {
+    "id": 282,
+    "name": "Install, update and uninstall",
+    "scope": "store",
+    "finding": "No packaged application or lifecycle evidence supplied."
+  },
+  {
+    "id": 283,
+    "name": "PWA",
+    "scope": "pwa",
+    "finding": "No application manifest or service worker found."
+  },
+  {
+    "id": 284,
+    "name": "Google Play",
+    "scope": "android",
+    "finding": "No Android package or current submission review supplied."
+  },
+  {
+    "id": 285,
+    "name": "Apple App Store",
+    "scope": "ios",
+    "finding": "No iOS package or beta evidence supplied."
+  },
+  {
+    "id": 286,
+    "name": "Huawei AppGallery",
+    "scope": "huawei",
+    "finding": "No Huawei-compatible package or test evidence supplied."
+  },
+  {
+    "id": 287,
+    "name": "Microsoft Store",
+    "scope": "windows",
+    "finding": "No Windows package or submission evidence supplied."
+  },
+  {
+    "id": 288,
+    "name": "Verified learning",
+    "scope": "verified",
+    "finding": "Integrity and verification screens use fixtures; authoritative feature must remain disabled."
+  },
+  {
+    "id": 289,
+    "name": "Certificates",
+    "scope": "certificate",
+    "finding": "Fixture data; no authoritative issuance service locally."
+  },
+  {
+    "id": 290,
+    "name": "Employer ecosystem",
+    "scope": "employer",
+    "finding": "Trustworthy evidence and verification dependencies are not implemented locally."
+  }
+]
