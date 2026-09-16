@@ -15,7 +15,7 @@
     "id": 260,
     "name": "Data persistence",
     "scope": "core",
-    "finding": "SQLite workspace persistence passes logout/login and API restart tests. Other learner resources still lack production storage."
+    "finding": "SQLite and Neon workspace persistence pass API restart and logout/login checks. Other learner resources remain incomplete."
   },
   {
     "id": 261,
@@ -27,7 +27,7 @@
     "id": 262,
     "name": "Authentication",
     "scope": "core",
-    "finding": "Standalone sessions, verification and reset implemented and tested locally. SMTP delivery and production security review pending."
+    "finding": "Standalone authentication passes local and Neon integration tests. Real email delivery and production abuse review remain pending."
   },
   {
     "id": 263,
@@ -45,7 +45,7 @@
     "id": 265,
     "name": "Preview isolation",
     "scope": "core",
-    "finding": "Preview.jsx renders static example, not isolated learner execution."
+    "finding": "React source compiles into an opaque sandboxed iframe. Parent DOM, cookie and API-network probes are blocked. Full hostile-workload review remains open."
   },
   {
     "id": 266,
@@ -69,19 +69,19 @@
     "id": 269,
     "name": "Privacy",
     "scope": "core",
-    "finding": "Legal text is draft; Settings export uses a timer."
+    "finding": "Password-confirmed export and deletion pass tests. Disclosures and broader privacy QA remain pending."
   },
   {
     "id": 270,
     "name": "Logging and secrets",
     "scope": "core",
-    "finding": "Removed hosted SDK/plugin and environment bootstrap. Full production artifact and logging review still required."
+    "finding": "Current dependency audit reports zero advisories. Production artifacts and logging still require full security review."
   },
   {
     "id": 271,
     "name": "Backups and restore",
     "scope": "core",
-    "finding": "No backup configuration or actual restore evidence supplied."
+    "finding": "Local SQLite restore test passes. PostgreSQL restore, offsite retention and monitoring remain open."
   },
   {
     "id": 272,
@@ -123,7 +123,7 @@
     "id": 278,
     "name": "Support",
     "scope": "core",
-    "finding": "No support entity/function or delivery evidence locally."
+    "finding": "Private support requests persist and can be read by the operator. Monitored routing and an external security contact remain pending."
   },
   {
     "id": 279,

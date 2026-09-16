@@ -1,0 +1,4 @@
+export function previewDocument(code) {
+  const escaped = code.replace(/<\/script/gi, '<\\/script');
+  return `<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; worker-src 'none'"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:system-ui;padding:12px}button{padding:8px;margin:4px}#error{white-space:pre-wrap;color:#b91c1c}</style></head><body><div id="root"></div><pre id="error" role="alert"></pre><script>addEventListener('error',e=>{document.getElementById('error').textContent=e.message});addEventListener('unhandledrejection',e=>{document.getElementById('error').textContent=String(e.reason)});</script><script>${escaped}</script></body></html>`;
+}

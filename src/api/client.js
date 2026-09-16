@@ -9,6 +9,13 @@ async function request(path, options = {}) {
 }
 const post = (path, data = {}) => request(path, { method: 'POST', body: JSON.stringify(data) });
 export const api = {
+  config: () => request('/config'),
+  preview: (files) => post('/preview', { files }),
+  account: {
+    export: (password) => post('/account/export', { password }),
+    delete: (password, confirmation) => request('/account', { method: 'DELETE', body: JSON.stringify({ password, confirmation }) }),
+  },
+  support: { create: (data) => post('/support', data), list: () => request('/support') },
   auth: {
     me: () => request('/auth/me'),
     register: (data) => post('/auth/register', data),

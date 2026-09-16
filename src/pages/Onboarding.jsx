@@ -1,3 +1,5 @@
+import { api } from '@/api/client';
+import { useAuth } from '@/lib/AuthContext';
 import React, { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -11,8 +13,16 @@ const stepLabels = ["Welcome", "Experience", "Goals", "Technologies", "Commitmen
 
 export default function Onboarding() {
   const navigate = useNavigate();
+  const { user, refreshUser } = useAuth();
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+  async function finish() {
+    setSaving(true); setError('');
+    try { await api.profile.update({ onboarding: { experience, goals, techs, commitment, path: 'javascript-react', completed: true } }); await refreshUser(); navigate('/learn'); }
+    catch (failure) { setError(failure.message); } finally { setSaving(false); }
+  }
   const [step, setStep] = useState(0);
-  const [experience, setExperience] = useState(null);
+  const [experience, setExperience] = useState(user.onboarding?.experience || null);
   const [goals, setGoals] = useState([]);
   const [techSearch, setTechSearch] = useState("");
   const [techs, setTechs] = useState(["JavaScript", "React"]);
@@ -44,7 +54,7 @@ export default function Onboarding() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl">
+      <div className="w-full max-w-2xl">{error && <p role="alert" className="text-destructive mb-4">{error}</p>}
         <div className="flex items-center justify-between mb-4">
           <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
@@ -198,8 +208,8 @@ export default function Onboarding() {
               <div className="mt-5 rounded-lg border border-primary/30 bg-primary/5 p-4">
                 <h4 className="text-xs font-semibold text-foreground uppercase tracking-wide mb-1">Skill outcome</h4>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  A job-ready React frontend developer with a verified portfolio of real projects —
-                  every skill backed by missions, tests and originality verification.
+                  Practise JavaScript and React by building projects.
+                  Formal assessment and verified portfolios are not available yet.
                 </p>
               </div>
             </div>
@@ -224,7 +234,7 @@ export default function Onboarding() {
               </button>
             ) : (
               <button
-                onClick={() => navigate("/")}
+                onClick={finish} disabled={saving}
                 className="inline-flex items-center gap-1.5 px-5 h-10 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90"
               >
                 Start learning <ArrowRight className="w-4 h-4" />

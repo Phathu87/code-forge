@@ -1,5 +1,5 @@
 # MVP status
 
-Incomplete. The current baseline includes the frontend, standalone accounts and durable workspaces. JavaScript/React Shared Preferences is the first exercise. The original app remains in programming-language-toggle-app/.
+Incomplete. Version 0.1.0 has standalone accounts, account-owned durable workspaces, onboarding preferences, a compiling React browser preview, data export/deletion, persisted support requests and health reporting. PostgreSQL supports free hosting; SQLite supports local development. The original exercise remains in programming-language-toggle-app/.
 
-Still required: execution, tests, server progress, publishing, privacy, support and production operations. No production runtime, native store package or authoritative certificate system is approved. See release-readiness-report.md.
+Still required: assessed execution and tests, server progress/XP, project publishing, reviewed privacy/legal content, monitored support, recovery/alerts and the complete QA matrix. The hosted preview keeps registration closed until email and controlled tester access are configured. No public production release, native store build or authoritative verification is approved.

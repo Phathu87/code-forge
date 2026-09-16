@@ -1,9 +1,11 @@
 # Security closeout
 
-Status: BLOCK RELEASE. Date: 2026-09-16. Scope: local version 0.0.0; current revision available with git rev-parse HEAD. No public security sign-off or accepted risk waiver.
+Status: BLOCK RELEASE. Date: 2026-09-17. Scope: 0.1.0 preview. No public security sign-off.
 
-Implemented controls: scrypt password hashing, hashed expiring sessions, HttpOnly/SameSite cookies (Secure in production), origin/custom-header checks, database-backed request limits, single-use verification/reset challenges and reset session revocation. Workspace ownership comes only from the authenticated session. Saves use conditional revisions. Client role changes and traversal-style source paths are rejected. Tests cover these boundaries and API restart persistence.
+Implemented: scrypt passwords; hashed expiring sessions; HttpOnly/SameSite cookies, Secure in production; origin/header checks; database-backed rate limits; single-use verification/reset; session revocation; account-owned workspace/support records; revision conflicts; password-confirmed export/deletion; restricted React compilation and opaque iframe preview. Tests run locally and on an isolated Neon integration schema. Registration is closed on the hosted preview. Production preview registration requires an explicit tester allowlist.
 
-Open high-impact work: secure code execution, production SMTP and reverse-proxy configuration, privacy operations, support routing, comprehensive abuse testing, dependency remediation, backup/restore and alert delivery. Local draft storage is not an encrypted vault. Assessment, certificate and employer features are not approved. No breach or sandbox escape is asserted.
+Browser checks block parent DOM, cookie and API network access from the preview. These checks are not a full sandbox audit. Hostile navigation, browser CPU/memory exhaustion, compiler resource limits and complete execution infrastructure remain release blockers. The preview provides no assessed execution or authoritative test results.
 
-See threat-model.md for boundaries and dependency-audit.json for advisory results. Follow security-incident-response.md for suspected incidents. Preserve evidence before recovery operations and make only supported impact statements. Security, engineering and operations review is still required.
+Latest npm audit reports zero advisories. This is dependency evidence, not a guarantee of security. Outstanding: real email delivery, abuse testing behind the hosting proxy, reviewed disclosures, operator support routing, PostgreSQL recovery, offsite backups, alert delivery and critical device/accessibility QA. Browser drafts are not an encrypted vault.
+
+Follow security-incident-response.md for suspected incidents. Preserve evidence before recovery and avoid unsupported impact claims.

@@ -13,8 +13,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  // Post-login destination (e.g. the MCP OAuth consent page sends users here
-  // with returnTo so the grant flow can resume). Same-origin paths only.
   const returnTo = safeReturnTo();
 
   const handleSubmit = async (e) => {
@@ -22,8 +20,8 @@ export default function Login() {
     setError("");
     setLoading(true);
     try {
-      await api.auth.login(email, password);
-      window.location.href = returnTo;
+      const user = await api.auth.login(email, password);
+      window.location.href = safeReturnTo(user.onboarding?.completed ? "/dashboard" : "/onboarding");
     } catch (err) {
       setError(err.message || "Invalid email or password");
     } finally {

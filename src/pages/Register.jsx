@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { api } from "@/api/client";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,8 @@ import { toast } from "@/components/ui/use-toast";
 import { safeReturnTo } from "@/lib/authReturnTo";
 
 export default function Register() {
+  const [registrationEnabled, setRegistrationEnabled] = useState(null);
+  useEffect(() => { api.config().then((config) => setRegistrationEnabled(config.registrationEnabled)).catch(() => setRegistrationEnabled(false)); }, []);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -42,7 +44,7 @@ export default function Register() {
     setLoading(true);
     try {
       await api.auth.verify({ email, otpCode });
-      window.location.href = safeReturnTo();
+      window.location.href = safeReturnTo("/onboarding");
     } catch (err) {
       setError(err.message || "Invalid verification code");
     } finally {
@@ -65,6 +67,7 @@ export default function Register() {
 
 
 
+  if (registrationEnabled !== true) return <AuthLayout icon={UserPlus} title="Registration" subtitle={registrationEnabled === null ? "Checking availability..." : "Registration is not open yet."}><p className="text-sm text-muted-foreground">{registrationEnabled === false ? "Email delivery is being configured. Please check back later." : "Please wait."}</p><Link to="/" className="block mt-4 text-primary">Back to CodeForge</Link></AuthLayout>;
   if (showOtp) {
     return (
       <AuthLayout
@@ -128,7 +131,7 @@ export default function Register() {
         <>
           Already have an account?{" "}
           <Link
-            to={"/login" + (safeReturnTo() !== "/" ? "?returnTo=" + encodeURIComponent(safeReturnTo()) : "")}
+            to={"/login" + (safeReturnTo("/onboarding") !== "/" ? "?returnTo=" + encodeURIComponent(safeReturnTo("/onboarding")) : "")}
             className="text-primary font-medium hover:underline"
           >
             Log in

@@ -1,6 +1,6 @@
 # AGENTS.md
 
-CodeForge is a React/Vite frontend with a Node.js API and SQLite storage.
+CodeForge is a React/Vite frontend with a Node.js API and PostgreSQL storage on hosted previews and SQLite locally.
 
 - Read README.md before changing setup or deployment.
 - Preserve the existing UI and the original exercise in programming-language-toggle-app/.

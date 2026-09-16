@@ -13,11 +13,12 @@ export function AuthProvider({ children }) {
     finally { setLoading(false); setChecked(true); }
   }, []);
   useEffect(() => { checkUserAuth(); }, [checkUserAuth]);
+  const refreshUser = async () => { setUser(await api.auth.me()); };
   const logout = async (shouldRedirect = true) => {
     await api.auth.logout(); setUser(null);
     if (shouldRedirect) window.location.assign('/login');
   };
-  return <AuthContext.Provider value={{ user, isAuthenticated: Boolean(user), isLoadingAuth, isLoadingPublicSettings: false, authChecked, authError, checkUserAuth, logout, navigateToLogin: () => window.location.assign('/login') }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, isAuthenticated: Boolean(user), isLoadingAuth, isLoadingPublicSettings: false, authChecked, authError, checkUserAuth, refreshUser, logout, navigateToLogin: () => window.location.assign('/login') }}>{children}</AuthContext.Provider>;
 }
 export function useAuth() {
   const context = useContext(AuthContext);

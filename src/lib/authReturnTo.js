@@ -1,7 +1,7 @@
 // Keep post-login redirects on this origin.
-export function safeReturnTo() {
+export function safeReturnTo(fallback = "/") {
   const raw = new URLSearchParams(window.location.search).get("returnTo");
-  if (!raw) return "/";
+  if (!raw) return fallback;
   try {
     const url = new URL(raw, window.location.origin);
     if (url.origin !== window.location.origin) return "/";

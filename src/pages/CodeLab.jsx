@@ -37,6 +37,7 @@ export default function CodeLab() {
   const folders = workspace.data.folders || [];
   const setFolders = (value) => workspace.update("folders", value);
   const [bottomTab, setBottomTab] = useState("requirements");
+  const [showPreview, setShowPreview] = useState(false);
   const [copilotOpen, setCopilotOpen] = useState(true);
   const [integrityOpen, setIntegrityOpen] = useState(false);
   const [pasteWarning, setPasteWarning] = useState(null);
@@ -46,7 +47,7 @@ export default function CodeLab() {
   const setDeps = (value) => workspace.update("deps", value);
   const [devLog, setDevLog] = useState(developmentTimeline);
   const saveState = workspace.status;
-  const [previewStatus, setPreviewStatus] = useState("Running");
+
 
   const logEvent = (event) =>
     setDevLog((prev) => [
@@ -132,11 +133,7 @@ export default function CodeLab() {
 
   const handleBlockedDependency = (pkg) => logEvent(`Blocked dependency install: ${pkg}`);
 
-  const refreshPreview = () => {
-    setPreviewStatus("Restarting");
-    logEvent("Preview restarted");
-    setTimeout(() => setPreviewStatus("Running"), 900);
-  };
+
 
   const handlePaste = (e) => {
     const text = e.clipboardData.getData("text");
@@ -166,6 +163,7 @@ export default function CodeLab() {
   return (
     <div className="flex flex-col h-[calc(100vh-4rem)]">
       <div className="px-4 py-2 text-xs border-b border-border flex gap-3 items-center"><span role="status">{workspace.message}</span><button className="underline ml-auto" onClick={workspace.download}>Download draft</button>{saveState === "conflict" && <button className="underline" onClick={workspace.loadServer}>Load server version</button>}</div>
+      <button className="lg:hidden p-3 border-b border-border text-sm" onClick={() => setShowPreview(!showPreview)}>{showPreview ? "Back to editor" : "Open browser preview"}</button>{showPreview && <div className="lg:hidden h-96 shrink-0"><Preview files={files} /></div>}
       {/* Mission top bar */}
       <div className="flex items-center gap-3 px-4 h-12 border-b border-border bg-card shrink-0">
         <button
@@ -298,14 +296,14 @@ export default function CodeLab() {
 
         {/* Live preview */}
         <div className="hidden lg:flex flex-col w-80 border-l border-border bg-card shrink-0">
-          <Preview status={previewStatus} onRefresh={refreshPreview} />
+          <Preview files={files} />
         </div>
 
         <CopilotPanel open={copilotOpen} onClose={() => setCopilotOpen(false)} />
       </div>
 
       {/* Runtime status bar */}
-      <StatusBar saveState={saveState} previewStatus={previewStatus} />
+      <StatusBar saveState={saveState} />
 
       {/* Modals */}
       {integrityOpen && <IntegrityModal onClose={() => setIntegrityOpen(false)} />}

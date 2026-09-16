@@ -1,70 +1,120 @@
 
-> code-forge@0.0.0 test
+> code-forge@0.1.0 test
 > node --test tests/*.test.mjs
 
 TAP version 13
-# Subtest: missing evidence blocks every target
-ok 1 - missing evidence blocks every target
+# Subtest: Brevo adapter sends plain-text verification through HTTPS and rejects provider errors
+ok 1 - Brevo adapter sends plain-text verification through HTTPS and rejects provider errors
   ---
-  duration_ms: 19.1935
+  duration_ms: 7.9919
+  type: 'test'
+  ...
+# Subtest: production requires mail unless registration is explicitly closed
+ok 2 - production requires mail unless registration is explicitly closed
+  ---
+  duration_ms: 1.1399
+  type: 'test'
+  ...
+# Subtest: preview compiles local React sources without evaluating learner code
+ok 3 - preview compiles local React sources without evaluating learner code
+  ---
+  duration_ms: 2252.074
+  type: 'test'
+  ...
+# Subtest: preview denies host paths, network imports, unknown packages, malformed and oversized source
+ok 4 - preview denies host paths, network imports, unknown packages, malformed and oversized source
+  ---
+  duration_ms: 3039.8111
+  type: 'test'
+  ...
+# Subtest: preview document blocks network and escapes closing script tags
+ok 5 - preview document blocks network and escapes closing script tags
+  ---
+  duration_ms: 1.569
+  type: 'test'
+  ...
+# (node:59632) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: privacy operations are owned, reauthenticated, durable and recoverable from backup
+ok 6 - privacy operations are owned, reauthenticated, durable and recoverable from backup
+  ---
+  duration_ms: 3894.2049
+  type: 'test'
+  ...
+# Subtest: missing evidence blocks every target
+ok 7 - missing evidence blocks every target
+  ---
+  duration_ms: 26.4544
   type: 'test'
   ...
 # Subtest: complete reviewed evidence satisfies all targets
-ok 2 - complete reviewed evidence satisfies all targets
+ok 8 - complete reviewed evidence satisfies all targets
   ---
-  duration_ms: 10.0533
+  duration_ms: 19.712
   type: 'test'
   ...
 # Subtest: failed core gate blocks all targets
-ok 3 - failed core gate blocks all targets
+ok 9 - failed core gate blocks all targets
   ---
-  duration_ms: 2.1934
+  duration_ms: 4.8285
   type: 'test'
   ...
 # Subtest: stale, missing, future and mismatched evidence cannot pass
-ok 4 - stale, missing, future and mismatched evidence cannot pass
+ok 10 - stale, missing, future and mismatched evidence cannot pass
   ---
-  duration_ms: 2.7247
+  duration_ms: 3.3014
   type: 'test'
   ...
 # Subtest: platform deferral cannot enable that platform or verified learning
-ok 5 - platform deferral cannot enable that platform or verified learning
+ok 11 - platform deferral cannot enable that platform or verified learning
   ---
-  duration_ms: 1.3744
+  duration_ms: 1.5755
   type: 'test'
   ...
 # Subtest: missing catalogue, identity, signoff and invalid target fail closed
-ok 6 - missing catalogue, identity, signoff and invalid target fail closed
+ok 12 - missing catalogue, identity, signoff and invalid target fail closed
   ---
-  duration_ms: 1.8917
+  duration_ms: 1.8415
   type: 'test'
   ...
 # Subtest: misclassified or duplicated catalogue cannot bypass required gates
-ok 7 - misclassified or duplicated catalogue cannot bypass required gates
+ok 13 - misclassified or duplicated catalogue cannot bypass required gates
   ---
-  duration_ms: 3.7415
+  duration_ms: 1.2866
   type: 'test'
   ...
-# (node:59276) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (node:50440) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 # (Use `node --trace-warnings ...` to show where the warning was created)
 # Subtest: account lifecycle, tenant isolation, durable workspaces and conflict protection
-ok 8 - account lifecycle, tenant isolation, durable workspaces and conflict protection
+ok 14 - account lifecycle, tenant isolation, durable workspaces and conflict protection
   ---
-  duration_ms: 4006.1092
+  duration_ms: 4465.5556
   type: 'test'
   ...
 # Subtest: production refuses a plaintext origin
-ok 9 - production refuses a plaintext origin
+ok 15 - production refuses a plaintext origin
   ---
-  duration_ms: 24.6066
+  duration_ms: 2.1241
   type: 'test'
   ...
-1..9
-# tests 9
+# Subtest: registration-closed preview rejects account creation before storing data
+ok 16 - registration-closed preview rejects account creation before storing data
+  ---
+  duration_ms: 32.9654
+  type: 'test'
+  ...
+# Subtest: production preview cannot open unrestricted registration
+ok 17 - production preview cannot open unrestricted registration
+  ---
+  duration_ms: 0.7726
+  type: 'test'
+  ...
+1..17
+# tests 17
 # suites 0
-# pass 9
+# pass 17
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 5975.0061
+# duration_ms 15415.2742

@@ -1,8 +1,8 @@
 {
-  "version": "0.0.0",
+  "version": "0.1.0",
   "commit": null,
-  "environment": "local",
-  "date": "2026-09-16",
+  "environment": "preview-candidate",
+  "date": "2026-09-17",
   "artifactSha256": null,
   "gates": {},
   "signoffs": {}

@@ -2,7 +2,7 @@
 
 A developer-learning project by **Phathutshedzo Rakhunwana**.
 
-CodeForge builds on my original Programming Language Toggle exercise. The original app is preserved in `programming-language-toggle-app/`; the current application runs from this repository's root.
+CodeForge builds on my original Programming Language Toggle exercise. The original app is preserved in `programming-language-toggle-app/`; the current app runs from this repository's root.
 
 ## Run locally
 
@@ -13,22 +13,28 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:5173. The API listens on port 3001. Accounts, sessions and workspace files are stored in `.data/codeforge.sqlite`. Development verification codes and password-reset messages are written to `.data/outbox/`. These files are private local data and are excluded from Git.
+Open http://localhost:5173. The API listens on port 3001. Without DATABASE_URL, accounts, sessions and source files live in `.data/codeforge.sqlite`. Development verification and password-reset messages are written to `.data/outbox/`. Both are ignored by Git.
 
-Create an account with a password of at least 12 characters. Open the latest message in the outbox to enter the verification code. After sign-in, use Code Lab to edit the Shared Preferences workspace. Changes save automatically; the status shows whether they are local, saving, saved or in conflict. Download a draft before discarding it or resolving a conflict.
+Create an account with a password of at least 12 characters and verify using the development outbox. Code Lab autosaves to your account and retains pending drafts locally. Conflicts do not overwrite the server: download your draft before loading another version.
 
-## Configuration
+Run compiles your App.jsx and local JavaScript, CSS and JSON imports into a React browser preview. Preview has an opaque origin, cannot access platform DOM/cookies, and blocks network requests. It does not run Node.js, install arbitrary packages, award XP or assess mission completion. Infinite-loop/resource-exhaustion protection still needs further work before public release.
 
-Copy `.env.example` to `.env.local` to change settings. Never commit credentials.
+Settings saves your name, exports your account/workspace/support records and deletes your account after password confirmation. Help saves private requests. Onboarding saves your selected preferences. Other learning screens still contain labelled demonstration data.
 
-Production requires `NODE_ENV=production`, an HTTPS `APP_ORIGIN`, `SMTP_URL` and `MAIL_FROM`. Set `DATABASE_PATH` to a persistent volume, put the server behind an HTTPS reverse proxy and configure backups. The server binds to localhost unless `HOST` is set explicitly. Development email files are never used in production.
+## Hosting
+
+The free deployment uses Render for the Node service and Neon PostgreSQL for durable storage. Render's temporary filesystem must never hold hosted learner data. The server refuses to start on Render without DATABASE_URL.
+
+`render.yaml` defines a free service with registration closed. Provide DATABASE_URL privately. APP_ORIGIN defaults to Render's HTTPS external URL; set it explicitly when using a custom domain. Keep automatic deploys disabled until the candidate is checked.
+
+For email, create a free Brevo account, verify a sender, and privately configure BREVO_API_KEY and MAIL_FROM (plain email address). The app uses Brevo's HTTPS API because Render's free tier blocks standard SMTP ports. After actual verification and recovery delivery tests, set REGISTRATION_ALLOWLIST to the invited test addresses and enable REGISTRATION_ENABLED. Missing email configuration never falls back to local outbox in production.
 
 ```sh
 npm run build
 npm start
 ```
 
-The API server also serves the compiled frontend. Configure the proxy to preserve the external request origin. The database is intended for a single server instance; do not share its file across multiple hosts.
+Render's free tier sleeps when idle and has shared usage limits. This setup is for preview/development, not a claim of public production readiness. See `docs/operations.md` and `docs/release-readiness-report.md`.
 
 ## Checks
 
@@ -40,14 +46,14 @@ npm run build
 npm run release:check -- web
 ```
 
-The release check currently blocks public launch. See `docs/release-readiness-report.md` for what works and what remains unfinished. Publishing source code does not mean the service has been deployed.
+To test the PostgreSQL adapter, put TEST_DATABASE_URL for a dedicated integration branch in the ignored `.env.integration` file, then run:
 
-## Current scope
+```sh
+node --env-file=.env.integration --test tests/server.test.mjs
+```
 
-Working: email registration and verification, sign-in/out, password recovery, server sessions, account-scoped workspace storage, local drafts and revision conflicts.
+The integration test creates and removes its own random schema. Do not point it at a production database. SQLite restore tests use temporary files and preserve the local development database.
 
-Still unfinished: isolated code execution, real mission tests, progress and XP, project publishing, privacy operations, production support and operational readiness. Demonstration screens remain labelled. Certificates and authoritative verification are disabled.
+## Ownership
 
-## Ownership and history
-
-Maintained by Phathutshedzo Rakhunwana. Git history preserves the original project. Third-party libraries retain their respective licences.
+Maintained by Phathutshedzo Rakhunwana. The original project history is preserved. Third-party libraries retain their respective licences.

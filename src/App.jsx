@@ -108,7 +108,7 @@ function App() {
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
-        <Router><div className="border-b border-border bg-card p-2 text-center text-sm" role="note">Development preview. Accounts and workspaces save to your server. Execution, progress and certificates are not available yet.</div>
+        <Router><div className="border-b border-border bg-card p-2 text-center text-sm" role="note">Development preview. Accounts and workspaces use server storage. Browser preview is available; assessed execution, XP and certificates are not.</div>
           <ScrollToTop />
           <ErrorBoundary>
             <AuthenticatedApp />

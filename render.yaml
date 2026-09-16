@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: code-forge
+    runtime: node
+    branch: master
+    repo: https://github.com/Phathu87/code-forge
+    region: frankfurt
+    plan: free
+    autoDeployTrigger: off
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATABASE_URL
+        sync: false
+      - key: REGISTRATION_ENABLED
+        value: false
+# Add BREVO_API_KEY and MAIL_FROM privately, validate delivery, then enable registration.
+# APP_ORIGIN defaults to Render's HTTPS external URL.
