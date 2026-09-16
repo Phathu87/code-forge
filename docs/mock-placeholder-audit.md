@@ -19,5 +19,3 @@ Current application, 2026-09-17. This is not a completed MVP audit.
 | programming-language-toggle-app/ | KEEP AS EXPLICIT DEMO/TEST FIXTURE | Original example preserved for history, not served by the current backend. |
 
 Remaining simulated learning functions must be replaced before removing the development notice or opening public registration. Hosted signup is restricted to two approved addresses. Trust features remain disabled.
-
-Dashboard, Learn, Roadmap and Missions now use the original Shared Preferences exercise with saved focus. Projects and Portfolio use actual private GitHub snapshots. Fabricated achievement badges were removed; awards remain unavailable. These replacements do not complete assessment or the full curriculum.

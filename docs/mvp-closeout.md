@@ -5,5 +5,3 @@ Incomplete. Version 0.1.0 has standalone accounts, account-owned durable workspa
 Shared Preferences now has an interactive four-milestone roadmap with saved focus and dashboard skill highlights. Projects and Portfolio store private, unverified GitHub source snapshots pinned to commits. Fake achievement awards were removed. Approved full curriculum and official brand assets remain outstanding.
 
 Still required: assessed execution and tests, server progress/XP, project publishing, reviewed privacy/legal content, monitored support, recovery/alerts and the complete QA matrix. Hosted email delivery is confirmed; registration is restricted to two approved addresses. No public production release, native store build or authoritative verification is approved.
-
-Shared Preferences now has four actionable milestones and an account-saved focus. Portfolio stores private, unverified GitHub source snapshots. Fake achievement awards were removed. Full approved curriculum and official brand assets remain outstanding.

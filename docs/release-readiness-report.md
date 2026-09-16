@@ -2,7 +2,7 @@
 
 **NOT READY for public production release.** Source publication is separate from deployment.
 
-Version: 0.1.0. Environments: local Windows, isolated Neon integration branch and a hosted development preview on free Render with Neon storage. Date: 2026-09-17. Deployed preview revision: ca77dd335f203f09d8b25d62de804e823eaae419. Registration is limited to two explicitly approved addresses. No public production release, operator sign-off or store submission has been approved. See [deployment record](deployment.md).
+Version: 0.1.0. Environments: local Windows, isolated Neon integration branch and a hosted development preview on free Render with Neon storage. Date: 2026-09-17. Deployed preview revision: 6bdf18f4cf0ec3b36a3497dc1ac88ec8355f4bb0. Registration is limited to two explicitly approved addresses. No public production release, operator sign-off or store submission has been approved. See [deployment record](deployment.md).
 
 ## Implemented
 
