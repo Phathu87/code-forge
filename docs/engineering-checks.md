@@ -7,3 +7,5 @@ Browser smoke on the disposable local account: signed in, compiled and rendered 
 SQLite backup test: took an online backup, restored into a new database, restarted the API and read the same source/support records. An overwrite attempt was rejected. Production PostgreSQL recovery remains untested.
 
 Brevo adapter unit tests use an explicit mock HTTP response; no real email delivery is claimed.
+
+Hosted email checks: approved test signup and recovery requests returned HTTP 200; both messages arrived in Gmail. An uninvited address received HTTP 403. The former SMTP key was deactivated in Brevo and rejected with SMTP 535 / EAUTH. See deployment.md for environment and revision.

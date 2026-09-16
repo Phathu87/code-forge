@@ -2,11 +2,11 @@
 
 **NOT READY for public production release.** Source publication is separate from deployment.
 
-Version: 0.1.0. Environments: local Windows, isolated Neon integration branch and a hosted development preview on free Render with Neon storage. Date: 2026-09-17. Deployed preview revision: e08ca06d75bf0b222924bf3da01b0caf3c09a922. Registration remains closed. No public production release, operator sign-off or store submission has been approved. See [deployment record](deployment.md).
+Version: 0.1.0. Environments: local Windows, isolated Neon integration branch and a hosted development preview on free Render with Neon storage. Date: 2026-09-17. Deployed preview revision: ca77dd335f203f09d8b25d62de804e823eaae419. Registration is limited to two explicitly approved addresses. No public production release, operator sign-off or store submission has been approved. See [deployment record](deployment.md).
 
 ## Implemented
 
-Standalone Node.js API, Neon PostgreSQL for free hosting and SQLite for local development, email verification, password recovery, hashed passwords and session tokens, HttpOnly cookies, request-origin checks and rate limits. Workspace reads/writes use the authenticated account, persist across API restarts, and reject stale revisions. The editor keeps local drafts and supports download/recovery. Brevo HTTPS email and optional SMTP adapters are implemented. Real provider delivery remains untested. Production may run without mail only with registration explicitly closed.
+Standalone Node.js API, Neon PostgreSQL for free hosting and SQLite for local development, email verification, password recovery, hashed passwords and session tokens, HttpOnly cookies, request-origin checks and rate limits. Workspace reads/writes use the authenticated account, persist across API restarts, and reject stale revisions. The editor keeps local drafts and supports download/recovery. Brevo HTTPS email and optional SMTP adapters are implemented. Verification and recovery messages from the hosted app reached the approved test inbox. Production may run without mail only with registration explicitly closed.
 
 Password-confirmed data export/deletion, private support requests, onboarding persistence, a compiling React browser preview, request logs, health checks and SQLite backup/restore tools are implemented. The original app and Git history are preserved. The frontend uses a normal Vite build. The project has its own branding and setup instructions. No hosted app-builder service is required.
 
@@ -24,7 +24,7 @@ No production gate has been granted PASS. Local improvements do not substitute f
 | 259 | Core journey | BLOCK RELEASE | Account, edit, save and reload tested locally; execution, assessment and public project journey remain incomplete. |
 | 260 | Data persistence | BLOCK RELEASE | SQLite workspace persistence passes logout/login and API restart tests. Other learner resources still lack production storage. |
 | 261 | Data-loss resilience | BLOCK RELEASE | Local drafts and server revision conflicts implemented. Full network, device, crash and storage-quota matrix remains open. |
-| 262 | Authentication | BLOCK RELEASE | Standalone sessions, verification and reset implemented and tested locally. Real email delivery and production security review pending. |
+| 262 | Authentication | BLOCK RELEASE | Standalone sessions, verification and reset implemented and tested locally. Hosted verification and recovery delivery passed; full production authentication review remains pending. |
 | 263 | Authorization | BLOCK RELEASE | Workspace ownership and client role-edit rejection pass API tests. Future sensitive resources need separate authorization tests. |
 | 264 | Execution sandbox | BLOCK RELEASE | No execution service or sandbox configuration in checkout. |
 | 265 | Preview isolation | BLOCK RELEASE | Real React preview uses an opaque sandboxed iframe and restrictive CSP. Browser smoke confirms parent DOM, cookies and API network requests are blocked. Hostile navigation/resource-exhaustion matrix is incomplete. |
