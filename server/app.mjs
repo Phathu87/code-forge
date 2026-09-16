@@ -1,3 +1,5 @@
+import { importRepository } from './github.mjs';
+import { learningPath } from '../src/lib/curriculum.js';
 import { compilePreview } from './preview.mjs';
 import { createServer } from 'node:http';
 import { openDatabase } from './database.mjs';
@@ -27,7 +29,7 @@ async function passwordMatches(password, stored) {
 }
 const publicUser = (row) => ({ id: row.id, email: row.email, full_name: row.name, role: row.role, verified: Boolean(row.verified), onboarding: JSON.parse(row.onboarding) });
 
-export function createApplication({ databasePath, databaseUrl, registrationEnabled = true, registrationAllowlist = [], origin = 'http://localhost:5173', production = false, deliver, log = () => {}, dist = resolve('dist') }) {
+export function createApplication({ databasePath, databaseUrl, registrationEnabled = true, registrationAllowlist = [], origin = 'http://localhost:5173', production = false, deliver, githubFetch = fetch, log = () => {}, dist = resolve('dist') }) {
   if (production && !origin.startsWith('https://')) throw new Error('Production APP_ORIGIN must use HTTPS.');
   if (!deliver) throw new Error('Email delivery must be configured.');
   if (production && registrationEnabled && !registrationAllowlist.length) throw new Error('Production preview registration requires an explicit tester allowlist.');
@@ -154,6 +156,24 @@ export function createApplication({ databasePath, databaseUrl, registrationEnabl
       return { reset: true };
     }
     const user = (await session(req));
+    if (path === '/api/learning/focus' && req.method === 'GET') return { milestone: (await db.prepare('SELECT milestone FROM learning_focus WHERE user_id=?').get(user.id))?.milestone || learningPath.milestones[0].id };
+    if (path === '/api/learning/focus' && req.method === 'PUT') {
+      if (!learningPath.milestones.some(item => item.id === data.milestone) || Object.keys(data).length !== 1) throw failure(400, 'Choose an available milestone.');
+      await db.prepare('INSERT INTO learning_focus VALUES (?,?) ON CONFLICT(user_id) DO UPDATE SET milestone=excluded.milestone').run(user.id, data.milestone);
+      return { milestone: data.milestone };
+    }
+    if (path === '/api/projects' && req.method === 'GET') return (await db.prepare('SELECT id,snapshot FROM github_imports WHERE user_id=? ORDER BY created_at DESC').all(user.id)).map(row => ({ id: row.id, ...JSON.parse(row.snapshot) }));
+    if (path === '/api/projects/github' && req.method === 'POST') {
+      await limit('github-import:' + user.id, 3);
+      if (data.confirmRights !== true || Object.keys(data).some(key => !['url','confirmRights'].includes(key))) throw failure(400, 'Confirm you own this work or have permission to import it.');
+      if ((await db.prepare('SELECT COUNT(*) AS count FROM github_imports WHERE user_id=?').get(user.id)).count >= 10) throw failure(409, 'This preview supports up to 10 imported snapshots per account.');
+      const snapshot = await importRepository(data.url, githubFetch);
+      await session(req);
+      const id = randomUUID();
+      await db.prepare('INSERT INTO github_imports VALUES (?,?,?,?,?,?) ON CONFLICT(user_id,repo,commit_sha) DO NOTHING').run(id,user.id,snapshot.repo,snapshot.commit,JSON.stringify(snapshot),Date.now());
+      const row = await db.prepare('SELECT id,snapshot FROM github_imports WHERE user_id=? AND repo=? AND commit_sha=?').get(user.id,snapshot.repo,snapshot.commit);
+      return { id: row.id, ...JSON.parse(row.snapshot) };
+    }
     if (path === '/api/preview' && req.method === 'POST') { (await limit('preview:' + user.id, 30)); return compilePreview(data.files); }
     if (path === '/api/auth/me' && req.method === 'GET') return publicUser(user);
     if (path === '/api/account/export' && req.method === 'POST') {
@@ -161,7 +181,7 @@ export function createApplication({ databasePath, databaseUrl, registrationEnabl
       if (!await passwordMatches(data.password, user.password)) throw failure(401, 'Password is incorrect.');
       (await session(req));
       const workspace = (await db.prepare('SELECT revision,data,updated_at FROM workspaces WHERE user_id=?').get(user.id));
-      return { schemaVersion: 1, exportedAt: new Date().toISOString(), profile: publicUser(user),
+      return { learningFocus: (await db.prepare('SELECT milestone FROM learning_focus WHERE user_id=?').get(user.id))?.milestone || null, importedProjects: (await db.prepare('SELECT snapshot FROM github_imports WHERE user_id=?').all(user.id)).map(row => JSON.parse(row.snapshot)), schemaVersion: 1, exportedAt: new Date().toISOString(), profile: publicUser(user),
         workspace: workspace ? { ...workspace, data: JSON.parse(workspace.data) } : null,
         supportRequests: (await db.prepare('SELECT id,category,subject,description,status,created_at FROM support_requests WHERE user_id=? ORDER BY created_at').all(user.id)) };
     }

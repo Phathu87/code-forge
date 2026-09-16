@@ -9,3 +9,11 @@ SQLite backup test: took an online backup, restored into a new database, restart
 Brevo adapter unit tests use an explicit mock HTTP response; no real email delivery is claimed.
 
 Hosted email checks: approved test signup and recovery requests returned HTTP 200; both messages arrived in Gmail. An uninvited address received HTTP 403. The former SMTP key was deactivated in Brevo and rejected with SMTP 535 / EAUTH. See deployment.md for environment and revision.
+
+## Roadmap and project update — 2026-09-17
+
+The current source replaces demo dashboard, roadmap, mission catalogue, portfolio and achievement records. Shared Preferences has four actionable milestones, account-saved focus and dashboard skill highlights. Projects and Portfolio save private, unverified public-GitHub source snapshots pinned to a commit. No authorship, assessment or certificate claim is made. Full approved curriculum and official brand assets remain outstanding.
+
+All 19 automated tests, lint, type checking and build passed. New lifecycle checks also passed in an isolated PostgreSQL schema: account isolation, duplicate imports, restart persistence, export and deletion cascades. GitHub tests cover fixed-host requests, source integrity, limits and provider errors. A live GitHub fetch returned a three-file snapshot. Local browser checks confirmed focus survives reload, the empty portfolio, import dialog rendering, Escape dismissal and focus restoration. The build retains a bundle-size warning above 500 KB.
+
+Public release remains blocked. Hosted email delivery is confirmed and signup is restricted to two approved addresses. Other demonstration screens and operational release gates remain unresolved.

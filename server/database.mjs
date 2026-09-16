@@ -5,7 +5,7 @@ import { Pool } from 'pg';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { sql } from 'drizzle-orm';
 
-const migration = readFileSync(new URL('./migrations/0001.sql', import.meta.url), 'utf8');
+const migration = ['0001.sql', '0002.sql'].map(file => readFileSync(new URL(`./migrations/${file}`, import.meta.url), 'utf8')).join('\n');
 export function openDatabase({ databasePath, databaseUrl }) {
   if (!databaseUrl) {
     const db = new DatabaseSync(databasePath);

@@ -1,5 +1,7 @@
-# Original Programming Language Toggle app
+# Original Programming Language Toggle exercise
 
-This folder preserves the original React exercise by Phathutshedzo Rakhunwana. It is not the application served by the root project.
+This folder preserves the React exercise by **Phathutshedzo Rakhunwana** that started CodeForge. It demonstrates sharing a language preference with React state and context.
 
-The current application and setup instructions are in ../README.md. Repository: https://github.com/Phathu87/code-forge
+The current CodeForge application runs from the repository root. Use the [main README](../README.md) for installation, development, hosting and feature status. This folder has a separate package manifest and is retained as the original exercise, not a second deployment of CodeForge.
+
+[Current repository](https://github.com/Phathu87/code-forge)
