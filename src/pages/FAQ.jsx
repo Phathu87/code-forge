@@ -6,59 +6,77 @@ import PublicShell from "@/components/landing/PublicShell";
 
 const categories = [
   {
-    name: "Getting started",
-    items: [
-      { q: "Is this an AI app generator?", a: "No. AI assists learning — it explains errors, syntax and concepts and asks guiding questions, but it never writes your solution. You write the code; the Code Coach helps you understand it." },
-      { q: "Who is CodeForge for?", a: "Developers learning by building — from complete beginners to working professionals. It also supports future reviewers and employers verifying skills. The first release is an 18+ public beta." },
-      { q: "Do I need prior coding experience?", a: "No. A beginner path starts from variables, conditions and functions. Your self-assessed level just sets the starting point — the path later adjusts to demonstrated skill." },
-      { q: "How long does a path take?", a: "That depends on your weekly commitment. We show estimated pace (e.g. React Foundations in 10–12 weeks at 5 hours/week), but we never guarantee completion times." },
-    ],
+    "name": "Getting started",
+    "items": [
+      {
+        "q": "Who is CodeForge for?",
+        "a": "People learning JavaScript and React through practical exercises. This build is a development preview, with public registration closed."
+      },
+      {
+        "q": "What can I do in this build?",
+        "a": "Invited testers can verify an account, complete onboarding, edit and save a workspace, preview React code, manage their profile and send a support request."
+      },
+      {
+        "q": "Where did CodeForge start?",
+        "a": "Phathutshedzo Rakhunwana built the original Programming Language Toggle exercise. CodeForge expands that React state and context exercise into a learning workspace."
+      }
+    ]
   },
   {
-    name: "Learning & missions",
-    items: [
-      { q: "What is a mission?", a: "A realistic coding challenge — build from scratch, fix a bug, refactor, integrate an API, implement UI, improve accessibility or performance, and more. Each has a brief, requirements, visible tests and hidden verification tests." },
-      { q: "Do I write all the code myself?", a: "Yes. That's the whole point. The platform teaches, hints and verifies — but you write the implementation. Paste protection guards original work during verified missions." },
-      { q: "What does the Code Coach do?", a: "It's a constrained teaching assistant with three hint levels — Nudge, Concept and Direction. It explains errors and points to documentation, but never generates the mission solution." },
-      { q: "Can the AI complete a function or component for me?", a: "No. The coach will not generate solutions, complete entire functions or components, rewrite your project, reveal hidden tests, or give certification answers." },
-      { q: "What mission types exist?", a: "Build From Scratch, Bug Fix, Real Client Brief, Refactor, API Integration, UI Implementation, Accessibility, Performance, Authentication, Database Logic, Algorithms, Testing and Deployment." },
-    ],
+    "name": "Code Lab",
+    "items": [
+      {
+        "q": "Can I run code?",
+        "a": "Run compiles React code into a restricted browser preview. Local JavaScript, CSS and JSON imports are supported. Server-side execution, arbitrary package installation and assessed tests are not available."
+      },
+      {
+        "q": "Is my work saved?",
+        "a": "Workspace files save to your account on the server. Pending edits remain as local drafts on the device. If versions conflict, download your draft before loading the server version."
+      },
+      {
+        "q": "What happens when I lose connectivity?",
+        "a": "The editor keeps a local draft and reports the save status. Saving resumes when connectivity returns. Download important work as an additional copy; device storage can be cleared or become full."
+      },
+      {
+        "q": "Does Code Coach use an AI provider?",
+        "a": "No provider is connected in this build. The current coach shows demonstration responses. These are not a working assessment or tutoring service."
+      }
+    ]
   },
   {
-    name: "Skills & certificates",
-    items: [
-      { q: "How are skills verified?", a: "Through completed missions, passing automated and hidden tests, practical assessments, and authorship challenges against your own code. A skill rating always links to the evidence behind it." },
-      { q: "What skill levels exist?", a: "Beginner, Foundation, Intermediate, Advanced, Professional and Specialist — based on demonstrated evidence, not course completion. Specialist reflects deep, technology-specific competence." },
-      { q: "Are certificates accredited?", a: "No. They are Verified Practical Skills Certificates — evidence-backed, not university or government accredited. Each carries a unique ID and a public verification link." },
-      { q: "How do I earn a certificate?", a: "Complete the required missions and projects, pass automated and hidden tests, pass a practical assessment, and pass code integrity verification (explain, modify and debug your own code)." },
-    ],
+    "name": "Skills and certificates",
+    "items": [
+      {
+        "q": "Can I earn verified skills or certificates?",
+        "a": "No. Authoritative skill verification, assessed mission completion, XP and certificate issuance are disabled or unfinished. Demonstration screens are not evidence of achievement."
+      },
+      {
+        "q": "Are there hidden tests or integrity assessments?",
+        "a": "No production test engine, reviewer workflow or integrity assessment is connected. These features require separate release validation before they can be enabled."
+      },
+      {
+        "q": "When will these features be available?",
+        "a": "No release date is committed. The repository release-readiness report records the remaining implementation and validation work."
+      }
+    ]
   },
   {
-    name: "Integrity & verification",
-    items: [
-      { q: "What is Verified Mission Mode?", a: "A strict assessment mode used for certificates, final skill assessments, specialist challenges and hiring assessments. It enables paste protection, development snapshots, authorship challenges and external-activity signals." },
-      { q: "Can I paste code during a verified mission?", a: "Large pastes are flagged and may be blocked in strict certification mode. You can explain a legitimate source (official docs, starter code, approved dependencies, your previous approved code)." },
-      { q: "Will I be automatically failed by AI detection?", a: "Never on a single signal. Similarity, tab-switching, fast completion or clean code alone never prove misconduct. Only substantial, multi-signal evidence — and serious consequences require human review." },
-      { q: "Can I appeal an integrity decision?", a: "Yes. You can request review with an explanation. A false positive never stays permanently on your public profile. Disputed high-value results can be resolved with a live verification challenge." },
-      { q: "What is authorship verification?", a: "After tests pass, you may be asked to explain parts of your code, modify your solution under new requirements, and debug injected defects — proving the work is genuinely yours." },
-    ],
-  },
-  {
-    name: "Privacy & data",
-    items: [
-      { q: "What data is collected during verified missions?", a: "Code history, timestamps, test history, paste events, focus events, hint history and solution similarity. It exists to protect the value of legitimate achievements." },
-      { q: "Who can see it?", a: "You and authorised reviewers. Behavioural telemetry is never shown publicly — employers see only public-safe verification data." },
-      { q: "Can I export or delete my data?", a: "Yes. Export Data and Delete Account options are provided in settings. Assessment-data and consent-history areas are laid out for future legal review." },
-    ],
-  },
-  {
-    name: "Beta & production",
-    items: [
-      { q: "Is this a real sandboxed runtime?", a: "Not yet. This is a public beta prototype. Secure code execution, real integrity scoring, reviewer workflows and certificate issuance arrive with the production backend — the frontend is architected to accept them without redesign." },
-      { q: "What's simulated in the prototype?", a: "Dashboards, the coding workspace, tests, achievements, portfolio, certificates and integrity reports are realistic mock interactions for demonstration." },
-      { q: "When will production features arrive?", a: "Through phased rollout: closed beta (auth, JS/React runtime, real tests), verified learning (hidden tests, integrity engine, reviewer workflows), multi-language runtimes, and eventually the employer ecosystem." },
-    ],
-  },
+    "name": "Privacy and support",
+    "items": [
+      {
+        "q": "Can I export or delete my data?",
+        "a": "Settings provides account export and deletion after you confirm your current password. Export includes your profile, workspace and private support requests. Download any unsynced draft before deleting your account."
+      },
+      {
+        "q": "Where is account data stored?",
+        "a": "The hosted preview uses PostgreSQL on Neon. Workspace drafts also remain in browser storage on the device. Local development uses SQLite unless configured otherwise."
+      },
+      {
+        "q": "How do I get help?",
+        "a": "Signed-in testers can submit a private request through Help. Requests persist, but email acknowledgements and a response-time commitment are not configured."
+      }
+    ]
+  }
 ];
 
 export default function FAQ() {

@@ -2,7 +2,7 @@
 
 **NOT READY for public production release.** Source publication is separate from deployment.
 
-Version: 0.1.0. Environment: local Windows and isolated Neon integration branch. Date: 2026-09-17. Source revision: use `git rev-parse HEAD` for the checked-out commit. No production artifact, operator sign-off or store submission has been approved.
+Version: 0.1.0. Environments: local Windows, isolated Neon integration branch and a hosted development preview on free Render with Neon storage. Date: 2026-09-17. Deployed preview revision: dac5a53c8ed886331e16282c033eca0f44b09c23. Registration remains closed. No public production release, operator sign-off or store submission has been approved. See [deployment record](deployment.md).
 
 ## Implemented
 
