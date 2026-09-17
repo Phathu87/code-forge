@@ -51,9 +51,11 @@ export default function AssessmentReview() {
                 className="block text-primary underline"
                 key={a.id}
                 onClick={() =>
-                  run(async () =>
-                    setAttempt(await api.learningCore.detail(a.id)),
-                  )
+                  run(async () => {
+                    setAttempt(await api.learningCore.detail(a.id));
+                    setNotes("");
+                    setFeedback("");
+                  })
                 }
               >
                 {a.definition_id} - {a.state}
