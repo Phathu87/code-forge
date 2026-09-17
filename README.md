@@ -19,7 +19,7 @@ This is a development preview. Registration is restricted to approved testers; p
 | React preview | Compiles local JavaScript, JSX, CSS and JSON into a restricted browser preview |
 | Profile and privacy | Name updates, onboarding preferences, password-confirmed export and account deletion |
 | Support | Private requests persist; email acknowledgements and a response-time commitment are not configured |
-| Learning roadmap | Interactive Shared Preferences milestones with an account-saved focus and dashboard skill highlights |
+| Learning curriculum | Versioned lessons, prerequisites, mission/project briefs and public rubrics across 8 frontend paths; reading and local practice available |
 | GitHub imports | Private source snapshots of public repositories, pinned to a commit, with source browsing and JSON download |
 | Assessment | Authoritative mission tests, completion, progress and XP remain unfinished |
 | Trust features | Verified skills, certificates and employer verification are not enabled |
@@ -107,7 +107,7 @@ The release check is expected to block public launch until the documented gates 
 For PostgreSQL integration testing, put `TEST_DATABASE_URL` for a dedicated test branch in the ignored `.env.integration` file:
 
 ```sh
-node --env-file=.env.integration --test tests/server.test.mjs tests/projects.test.mjs tests/projects.test.mjs
+node --env-file=.env.integration --test tests/server.test.mjs tests/projects.test.mjs
 ```
 
 These tests create and remove a disposable schema. Do not point them at production. SQLite restore tests use temporary files.
@@ -118,9 +118,17 @@ From Projects or Portfolio, enter a public `https://github.com/owner/repository`
 
 Imports support up to 30 text files, 100 KB per file and 300 KB total. Binary files, hidden paths, build output and lockfiles are excluded; the UI reports the excluded count. Private repository access, automatic syncing, public portfolio publishing and authorship verification are not implemented. An imported project is always **Unverified**. GitHub availability and API rate limits can temporarily prevent imports.
 
+## Official curriculum
+
+[Curriculum v1.0.0](docs/curriculum/official-curriculum-v1.md) contains 37 modules, 53 lesson units, 37 missions, 8 projects and 40 assessment briefs. The [delivery and governance guide](docs/curriculum/README.md) explains prerequisites, rubrics, versioning, evidence and disabled certificate mappings. Learn and Roadmap browse the database-backed catalogue; the existing Shared Preferences focus is preserved.
+
+Author content in the curriculum source files, then run `node scripts/build-curriculum.mjs` to regenerate the JSON and Markdown artifacts. Published curriculum versions are immutable; change the version rather than overwrite historical requirements. The [local practice fixtures](curriculum/fixtures/README.md) include deliberate bugs and an adapter-based visible test suite.
+
+Reading a brief is not a completed mission. New activity runners, automated grading and authoritative progression remain unavailable.
+
 ## Remaining work
 
-- Supply and approve the full course curriculum, additional mission requirements and official brand assets. The current learning path uses only the original Shared Preferences exercise.
+- Connect the authored curriculum to mission workspaces, assessment runners, evidence-based progression and reviewer workflows. Official brand assets remain outstanding.
 - Complete learning progress, assessment, project publishing and Code Coach services.
 - Validate execution isolation, recovery, accessibility, devices and operational monitoring.
 - Enable verified learning and certificates only after their separate release gates pass.

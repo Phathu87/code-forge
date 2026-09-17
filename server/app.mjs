@@ -1,3 +1,4 @@
+import { seedCurriculum, readCurriculum } from './curriculum.mjs';
 import { importRepository } from './github.mjs';
 import { learningPath } from '../src/lib/curriculum.js';
 import { compilePreview } from './preview.mjs';
@@ -34,6 +35,8 @@ export function createApplication({ databasePath, databaseUrl, registrationEnabl
   if (!deliver) throw new Error('Email delivery must be configured.');
   if (production && registrationEnabled && !registrationAllowlist.length) throw new Error('Production preview registration requires an explicit tester allowlist.');
   const db = openDatabase({ databasePath, databaseUrl });
+  const curriculumReady = db.ready.then(() => db.run(() => seedCurriculum(db)));
+  curriculumReady.catch(() => {}); // server.ready reports startup failure; avoid an unhandled background rejection.
   const dummyPassword = '00000000000000000000000000000000:' + '0'.repeat(128);
   async function limit(key, max = 20) {
     const now = Date.now();
@@ -83,6 +86,7 @@ export function createApplication({ databasePath, databaseUrl, registrationEnabl
       if (!req.headers['content-type']?.startsWith('application/json')) throw failure(415, 'JSON is required.');
     }
     if (path === '/api/health' && req.method === 'GET') { (await db.prepare('SELECT 1').get()); return { status: 'ok', version: '0.1.0', commit: process.env.RENDER_GIT_COMMIT || 'local' }; }
+    if (path === '/api/curriculum' && req.method === 'GET') { await curriculumReady; return readCurriculum(db); }
     if (path === '/api/config' && req.method === 'GET') return { registrationEnabled };
     const data = req.method === 'GET' ? {} : await body(req);
     if (path.startsWith('/api/auth/') && req.method === 'POST') {
@@ -276,6 +280,6 @@ export function createApplication({ databasePath, databaseUrl, registrationEnabl
   server.headersTimeout = 10000;
   server.keepAliveTimeout = 5000;
   server.on('close', () => { Promise.resolve(db.close()).catch(() => {}); });
-  server.ready = db.ready;
+  server.ready = curriculumReady;
   return server;
 }

@@ -61,3 +61,5 @@ Assessed execution isolation, real test engine, server progress/XP, project publ
 Engineering, security, operations and product sign-offs: pending. Deferred: verified learning, certificates, employer ecosystem, PWA and store packages. Deployment status is recorded in docs/deployment.md; a closed-registration preview is not a public release.
 
 Current source adds account-saved learning focus and private, unverified GitHub snapshots. See engineering-checks.md for 19 passing tests and isolated PostgreSQL/browser evidence. Full curriculum, official brand assets and the existing public release blockers remain outstanding.
+
+Curriculum v1.0.0 update: the owner has supplied the curriculum authority; authored lessons, activities, typed prerequisites and rubrics now exist with database-backed versioned read access. Earlier references to awaiting curriculum input are superseded. Reading/local practice is available, but production runners, assessment, evidence enforcement and reviewed certification remain disabled. Official brand assets remain outstanding. Public release status is still NOT READY.

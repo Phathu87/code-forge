@@ -17,3 +17,11 @@ The current source replaces demo dashboard, roadmap, mission catalogue, portfoli
 All 19 automated tests, lint, type checking and build passed. New lifecycle checks also passed in an isolated PostgreSQL schema: account isolation, duplicate imports, restart persistence, export and deletion cascades. GitHub tests cover fixed-host requests, source integrity, limits and provider errors. A live GitHub fetch returned a three-file snapshot. Local browser checks confirmed focus survives reload, the empty portfolio, import dialog rendering, Escape dismissal and focus restoration. The build retains a bundle-size warning above 500 KB.
 
 Public release remains blocked. Hosted email delivery is confirmed and signup is restricted to two approved addresses. Other demonstration screens and operational release gates remain unresolved.
+
+## Official curriculum update — 2026-09-17
+
+Curriculum version 1.0.0 contains eight paths, 37 modules, 53 lesson units, 37 missions, eight projects and 40 assessment briefs. This supersedes the earlier note that the full authored curriculum was outstanding. Production assessment runners, server-authoritative progression and verified evidence remain unfinished.
+
+All 22 automated tests, lint, type checking and the build passed. Curriculum checks cover reference validity, prerequisite cycles, generated-source consistency, database readback, SQLite restart persistence and rejection of changed content under an existing version. The project lifecycle suite also passed in an isolated PostgreSQL schema with curriculum migration/readback. The public task-manager behaviour suite has 11 checks but still needs an adapter to a real learner interface; its infrastructure-error tests are not learner assessment results.
+
+A disposable local browser account opened the curriculum, selected the JavaScript path, expanded a storage lesson and viewed the Persistent Developer Preferences requirements and public rubric. These checks do not establish full curriculum accessibility, assessment execution or public-release readiness. The build retains its bundle-size warning above 500 KB.

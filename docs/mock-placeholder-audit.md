@@ -19,3 +19,5 @@ Current application, 2026-09-17. This is not a completed MVP audit.
 | programming-language-toggle-app/ | KEEP AS EXPLICIT DEMO/TEST FIXTURE | Original example preserved for history, not served by the current backend. |
 
 Remaining simulated learning functions must be replaced before removing the development notice or opening public registration. Hosted signup is restricted to two approved addresses. Trust features remain disabled.
+
+Curriculum v1.0.0 supersedes the limited exercise-only catalogue. Learn, Roadmap and Missions now expose actual authored content and public briefs from versioned server storage. Deliberately broken examples in curriculum/fixtures are KEEP AS EXPLICIT DEMO/TEST FIXTURE for debugging practice; they are never imported as production application behaviour. Test plans are labelled specified, not executed. No fabricated completion or evidence is awarded.

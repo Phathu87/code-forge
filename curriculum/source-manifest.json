@@ -1,0 +1,32 @@
+[
+  {
+    "sections": "1-33",
+    "attachmentId": "ef0f5d80-5c75-4934-a19e-e0b50147ca2d",
+    "sha256": "3f2577eb810db73c0b4e6aded35129938908e84c829e912e8bc5d504339b212b"
+  },
+  {
+    "sections": "34-71",
+    "attachmentId": "fb77d12f-e5a9-414d-a024-b6c4d1cea379",
+    "sha256": "b3ea10992cfcd0bb94d46369107edd0108569935bda410f435ff9f74d9c8c920"
+  },
+  {
+    "sections": "72-116",
+    "attachmentId": "3b605225-d64f-4ce5-bec3-c05e2bb811d1",
+    "sha256": "524823212bc08c278064f4ec149f933e5afa6c9980cffce7cd8590f09049694b"
+  },
+  {
+    "sections": "117-133",
+    "attachmentId": "f784e2c2-fe36-41cb-aa39-cbca8ac9867f",
+    "sha256": "92352df81812110c11e33191a80a46872ec97e0e31ca6d5ce8c2a2c17933ac6f"
+  },
+  {
+    "sections": "134-167",
+    "attachmentId": "ae0f65dd-4124-42de-b190-7e7fda3c4d0f",
+    "sha256": "049e97363ea494a684110f0ef9877339dd957cf817b87779613fb072394f00de"
+  },
+  {
+    "sections": "134-167 duplicate",
+    "attachmentId": "574b38d9-0fc6-4161-a0f2-bc9ed1932e34",
+    "sha256": "049e97363ea494a684110f0ef9877339dd957cf817b87779613fb072394f00de"
+  }
+]

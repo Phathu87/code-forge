@@ -179,6 +179,7 @@ test("focus and source imports persist, remain private and unverified, export an
   };
   try {
     await start();
+    assert.equal((await request('/curriculum')).body.version, '1.0.0');
     const alice = await account("alice@projects.test"),
       bob = await account("bob@projects.test");
     assert.equal((await request("/projects")).status, 401);
@@ -221,6 +222,7 @@ test("focus and source imports persist, remain private and unverified, export an
     );
     await stop();
     await start();
+    assert.equal((await request('/curriculum')).body.version, '1.0.0');
     assert.equal(
       (await request("/learning/focus", "GET", {}, alice)).body.milestone,
       "context",

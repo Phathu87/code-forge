@@ -9,6 +9,7 @@ async function request(path, options = {}) {
 }
 const post = (path, data = {}) => request(path, { method: 'POST', body: JSON.stringify(data) });
 export const api = {
+  curriculum: () => request('/curriculum'),
   learning: { focus: () => request('/learning/focus'), setFocus: (milestone) => request('/learning/focus', { method: 'PUT', body: JSON.stringify({ milestone }) }) },
   projects: { list: () => request('/projects'), importGithub: (url, confirmRights) => post('/projects/github', { url, confirmRights }) },
   config: () => request('/config'),
