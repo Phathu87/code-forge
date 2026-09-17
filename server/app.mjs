@@ -1,3 +1,5 @@
+import { seedLearning } from './learning/definitions.mjs';
+import { createLearningService } from './learning/service.mjs';
 import { seedCurriculum, readCurriculum } from './curriculum.mjs';
 import { importRepository } from './github.mjs';
 import { learningPath } from '../src/lib/curriculum.js';
@@ -30,12 +32,13 @@ async function passwordMatches(password, stored) {
 }
 const publicUser = (row) => ({ id: row.id, email: row.email, full_name: row.name, role: row.role, verified: Boolean(row.verified), onboarding: JSON.parse(row.onboarding) });
 
-export function createApplication({ databasePath, databaseUrl, registrationEnabled = true, registrationAllowlist = [], origin = 'http://localhost:5173', production = false, deliver, githubFetch = fetch, log = () => {}, dist = resolve('dist') }) {
+export function createApplication({ databasePath, databaseUrl, registrationEnabled = true, registrationAllowlist = [], origin = 'http://localhost:5173', production = false, deliver, githubFetch = fetch, learningOptions = {}, log = () => {}, dist = resolve('dist') }) {
   if (production && !origin.startsWith('https://')) throw new Error('Production APP_ORIGIN must use HTTPS.');
   if (!deliver) throw new Error('Email delivery must be configured.');
   if (production && registrationEnabled && !registrationAllowlist.length) throw new Error('Production preview registration requires an explicit tester allowlist.');
   const db = openDatabase({ databasePath, databaseUrl });
-  const curriculumReady = db.ready.then(() => db.run(() => seedCurriculum(db)));
+  const curriculumReady = db.ready.then(() => db.run(async () => { await seedCurriculum(db); await seedLearning(db); }));
+  const learning = createLearningService(db, { origin, ...learningOptions });
   curriculumReady.catch(() => {}); // server.ready reports startup failure; avoid an unhandled background rejection.
   const dummyPassword = '00000000000000000000000000000000:' + '0'.repeat(128);
   async function limit(key, max = 20) {
@@ -159,7 +162,29 @@ export function createApplication({ databasePath, databaseUrl, registrationEnabl
       } catch (error) { (await db.exec('ROLLBACK')); throw error; }
       return { reset: true };
     }
+    if (path.startsWith('/api/certificates/verify/') && req.method === 'GET') return learning.verify(path.split('/').at(-1));
     const user = (await session(req));
+    if (path.startsWith('/api/learning-core/')) {
+      await curriculumReady;
+      if (req.method !== 'GET') await limit('learning:' + user.id, 30);
+      const parts = path.slice('/api/learning-core/'.length).split('/');
+      if (parts[0] === 'catalog' && req.method === 'GET') return learning.catalog();
+      if (parts[0] === 'progress' && req.method === 'GET') return learning.progress(user);
+      if (parts[0] === 'attempts' && parts.length === 1 && req.method === 'POST') return learning.start(user, data);
+      if (parts[0] === 'attempts' && parts.length === 2 && req.method === 'GET') return learning.detail(user, parts[1]);
+      const actions = { submit:'submit', grade:'grade', review:'review', assign:'assign', integrity:'integrity' };
+      if (parts[0] === 'attempts' && parts.length === 3 && req.method === 'POST' && Object.hasOwn(actions,parts[2])) return learning[actions[parts[2]]](user,parts[1],data);
+      if (parts[0] === 'review-queue' && req.method === 'GET') return learning.queue(user);
+      if (parts[0] === 'definitions' && parts.length === 1 && req.method === 'GET') return learning.definitions(user);
+      if (parts[0] === 'definitions' && parts.length === 1 && req.method === 'POST') return learning.saveDefinition(user,data);
+      if (parts[0] === 'definitions' && parts.length === 3 && req.method === 'POST') return learning.publish(user,parts[1],parts[2],data);
+      if (parts[0] === 'certificate-consent' && req.method === 'POST') return learning.consent(user,data);
+      if (parts[0] === 'certificates' && parts.length === 3 && parts[2] === 'document' && req.method === 'GET') return learning.document(user,parts[1]);
+      if (parts[0] === 'certificates' && parts.length === 1 && req.method === 'GET') return learning.certificates(user);
+      if (parts[0] === 'certificates' && parts.length === 1 && req.method === 'POST') return learning.issue(user,data);
+      if (parts[0] === 'certificates' && parts.length === 3 && parts[2] === 'revoke' && req.method === 'POST') return learning.revoke(user,parts[1],data);
+      throw failure(404,'Learning route not found.');
+    }
     if (path === '/api/learning/focus' && req.method === 'GET') return { milestone: (await db.prepare('SELECT milestone FROM learning_focus WHERE user_id=?').get(user.id))?.milestone || learningPath.milestones[0].id };
     if (path === '/api/learning/focus' && req.method === 'PUT') {
       if (!learningPath.milestones.some(item => item.id === data.milestone) || Object.keys(data).length !== 1) throw failure(400, 'Choose an available milestone.');
@@ -185,7 +210,7 @@ export function createApplication({ databasePath, databaseUrl, registrationEnabl
       if (!await passwordMatches(data.password, user.password)) throw failure(401, 'Password is incorrect.');
       (await session(req));
       const workspace = (await db.prepare('SELECT revision,data,updated_at FROM workspaces WHERE user_id=?').get(user.id));
-      return { learningFocus: (await db.prepare('SELECT milestone FROM learning_focus WHERE user_id=?').get(user.id))?.milestone || null, importedProjects: (await db.prepare('SELECT snapshot FROM github_imports WHERE user_id=?').all(user.id)).map(row => JSON.parse(row.snapshot)), schemaVersion: 1, exportedAt: new Date().toISOString(), profile: publicUser(user),
+      return { learning: await learning.export(user), learningFocus: (await db.prepare('SELECT milestone FROM learning_focus WHERE user_id=?').get(user.id))?.milestone || null, importedProjects: (await db.prepare('SELECT snapshot FROM github_imports WHERE user_id=?').all(user.id)).map(row => JSON.parse(row.snapshot)), schemaVersion: 1, exportedAt: new Date().toISOString(), profile: publicUser(user),
         workspace: workspace ? { ...workspace, data: JSON.parse(workspace.data) } : null,
         supportRequests: (await db.prepare('SELECT id,category,subject,description,status,created_at FROM support_requests WHERE user_id=? ORDER BY created_at').all(user.id)) };
     }
@@ -195,6 +220,7 @@ export function createApplication({ databasePath, databaseUrl, registrationEnabl
       if (!await passwordMatches(data.password, user.password)) throw failure(401, 'Password is incorrect.');
       // Hashing yields: reject a request if a concurrent reset revoked this session.
       (await session(req));
+      await learning.eraseIdentity(user);
       const deleted = await db.prepare('DELETE FROM users WHERE id=? AND password=?').run(user.id, user.password);
       if (!deleted.changes) throw failure(409, 'Account changed. Sign in again before deleting it.');
       cookie(res, '', 0);

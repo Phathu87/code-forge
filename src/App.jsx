@@ -1,3 +1,6 @@
+import Assessments from '@/pages/Assessments';
+import AssessmentReview from '@/pages/AssessmentReview';
+import Certificates, { PublicCertificate } from '@/pages/Certificates';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
@@ -23,7 +26,7 @@ import Projects from '@/pages/Projects';
 import Leaderboard from '@/pages/Leaderboard';
 import Community from '@/pages/Community';
 import Integrity from '@/pages/Integrity';
-import VerificationUnavailable from '@/components/VerificationUnavailable';
+
 import Achievements from '@/pages/Achievements';
 
 import Settings from '@/pages/Settings';
@@ -67,7 +70,7 @@ const AuthenticatedApp = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/verify" element={<VerificationUnavailable />} />
+      <Route path="/verify" element={<PublicCertificate />} /><Route path="/verify/:id" element={<PublicCertificate />} />
       <Route path="/" element={<Landing />} />
       <Route path="/how-it-works" element={<HowItWorks />} />
       <Route path="/faq" element={<FAQ />} />
@@ -91,7 +94,7 @@ const AuthenticatedApp = () => {
           <Route path="/integrity" element={<Integrity />} />
           <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/achievements" element={<Achievements />} />
-          <Route path="/certificates" element={<VerificationUnavailable />} />
+          <Route path="/certificates" element={<Certificates />} /><Route path="/assessments" element={<Assessments />} /><Route path="/assessment-review" element={<AssessmentReview />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/admin" element={<Admin />} />

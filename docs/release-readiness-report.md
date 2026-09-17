@@ -65,3 +65,7 @@ Current source adds account-saved learning focus and private, unverified GitHub 
 Curriculum v1.0.0 update: the owner has supplied the curriculum authority; authored lessons, activities, typed prerequisites and rubrics now exist with database-backed versioned read access. Earlier references to awaiting curriculum input are superseded. Reading/local practice is available, but production runners, assessment, evidence enforcement and reviewed certification remain disabled. Official brand assets remain outstanding. Public release status is still NOT READY.
 
 Brand System 1.0 is implemented with canonical marks, web assets, native candidates, shared tokens and HTML/text email templates. See [brand closeout](brand-closeout.md): BRAND BLOCKED pending inherited-rights/name review, historical visual-parity comparison, full accessibility QA, final-domain metadata and target-platform integration. This does not change NOT READY.
+
+## Learning system implementation checkpoint — 2026-09-17
+
+The assessment ledger, immutable submissions, reviewer workflow, evidence-derived progress, competency coverage and certificate lifecycle now exist for internal QA. Submissions remain closed by default; practical automated grading is not connected. Verified learning and issuance are disabled. No additional production gate is granted PASS. See [learning system closeout](learning-core-closeout.md) for the implementation boundary and remaining requirements.

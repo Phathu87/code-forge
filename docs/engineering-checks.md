@@ -32,3 +32,11 @@ The existing blue Code2 mark, dark palette and typography stacks were extracted 
 
 All 24 tests passed, including email HTML escaping, plain-text preservation, provider failure handling and safe reset links. Lint and type checking passed. Local browser review confirmed the landing layout and headline, canonical mark, authentication labels and visible input focus. The social image was visually inspected; all 33 manifest-listed assets exist and PNG dimensions were checked. Native candidates have not been tested in packages. No real email was sent by these tests and no full visual-parity or accessibility pass is claimed.
 The final production build passed; the existing bundle-size warning above 500 KB remains.
+
+## Learning core checks — 2026-09-17
+
+The local suite passes 29 tests, followed by lint, TypeScript checks and the Vite production build. Learning tests cover required grading gates, protected rules, cross-user access, immutable snapshots, retries, XP, prerequisites, reviewer assignment, infrastructure failure, placement, certificate lifecycle and privacy. A retake preserves original evidence and does not duplicate XP; holding certificate source evidence revokes that certificate even when replacement evidence exists.
+
+Browser smoke on an isolated local database: sign-in, assessment catalog, required criteria, persisted attempt creation, rejection of a practical submission without source files, ordinary-account exclusion from reviewer operations, and the separate reviewer's assignment queue. No production reviewer role was granted. This does not establish full browser, accessibility or device QA.
+
+The build still warns about a JavaScript bundle larger than 500 kB. PostgreSQL integration validation is recorded separately when completed. Synthetic graders and human-review fixtures test state transitions only; they do not validate execution isolation or learner competence.

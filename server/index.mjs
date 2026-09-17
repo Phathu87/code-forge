@@ -10,7 +10,7 @@ if (production && process.env.RENDER && !databaseUrl) throw new Error('Render re
 if (!databaseUrl) await mkdir(dirname(databasePath), { recursive: true });
 const deliver = await configureMail();
 const log = (event) => console.log(JSON.stringify({ at: new Date().toISOString(), ...event }));
-const server = createApplication({ databasePath, databaseUrl, production, log, registrationAllowlist: (process.env.REGISTRATION_ALLOWLIST || '').split(',').map((email) => email.trim().toLowerCase()).filter(Boolean), registrationEnabled: process.env.REGISTRATION_ENABLED !== 'false', origin: process.env.APP_ORIGIN || process.env.RENDER_EXTERNAL_URL || 'http://localhost:5173', deliver });
+const server = createApplication({ databasePath, databaseUrl, production, log, learningOptions: { enabled: process.env.LEARNING_CORE_ENABLED === 'true', verifiedEnabled: false, certificatesEnabled: false }, registrationAllowlist: (process.env.REGISTRATION_ALLOWLIST || '').split(',').map((email) => email.trim().toLowerCase()).filter(Boolean), registrationEnabled: process.env.REGISTRATION_ENABLED !== 'false', origin: process.env.APP_ORIGIN || process.env.RENDER_EXTERNAL_URL || 'http://localhost:5173', deliver });
 await server.ready;
 server.listen(Number(process.env.PORT || 3001), process.env.HOST || '127.0.0.1', () => log({ event: 'listening', port: Number(process.env.PORT || 3001), storage: databaseUrl ? 'postgres' : 'sqlite' }));
 let backupTimer;

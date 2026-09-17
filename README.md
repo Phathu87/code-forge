@@ -21,10 +21,12 @@ This is a development preview. Registration is restricted to approved testers; p
 | Support | Private requests persist; email acknowledgements and a response-time commitment are not configured |
 | Learning curriculum | Versioned lessons, prerequisites, mission/project briefs and public rubrics across 8 frontend paths; reading and local practice available |
 | GitHub imports | Private source snapshots of public repositories, pinned to a commit, with source browsing and JSON download |
-| Assessment | Authoritative mission tests, completion, progress and XP remain unfinished |
+| Assessment | Versioned submissions, reviewer decisions, evidence-derived progress and idempotent XP implemented for internal QA; practical grading is not connected |
 | Trust features | Verified skills, certificates and employer verification are not enabled |
 
 The browser preview does not provide a Node.js runtime or arbitrary dependency installation. Resource-exhaustion testing and the remaining release gates must pass before public launch. See the [deployment record](docs/deployment.md) for the tested build and [engineering checks](docs/engineering-checks.md) for evidence.
+
+Assessment submissions remain closed by default. The [learning system implementation](docs/learning-core.md) describes reviewer access, release restrictions and the remaining work.
 
 ## Run locally
 
