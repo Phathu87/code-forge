@@ -138,3 +138,7 @@ Web is the current preview target. PWA installation and Android, iOS, Huawei and
 ## Ownership
 
 Maintained by Phathutshedzo Rakhunwana. This repository preserves the original project history. Third-party dependencies retain their respective licences.
+
+## Brand system
+
+The existing CodeForge identity is documented in [Brand System 1.0](docs/brand-system.md), with [design tokens and components](docs/design-system.md), an [asset inventory](docs/brand-assets.md) and an explicit [brand closeout](docs/brand-closeout.md). Public brand approval remains blocked; native assets are candidates until packaging and review.

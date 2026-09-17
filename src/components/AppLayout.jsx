@@ -1,8 +1,9 @@
+import BrandMark from "@/components/BrandMark";
 import { useAuth } from "@/lib/AuthContext";
 import React, { useState } from "react";
 import { Outlet, NavLink, useLocation, Link } from "react-router-dom";
 import {
-  Code2, Menu, Search, Zap, Flame, Bell, Moon, Circle,
+  Code2, Menu, Search, Zap, Flame, Bell, Circle,
   LayoutDashboard, BookOpen, Target, FolderGit2, Briefcase,
   TrendingUp, Award, BadgeCheck, Trophy, Users, Settings, ShieldCheck, Route, UserCog,
 } from "lucide-react";
@@ -32,9 +33,7 @@ function Sidebar({ open, onClose }) {
         )}
       >
         <div className="flex items-center gap-2.5 px-5 h-16 border-b border-sidebar-border">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-            <Code2 className="w-4 h-4 text-primary-foreground" />
-          </div>
+          <BrandMark />
           <div className="leading-tight">
             <div className="font-heading font-semibold text-foreground text-sm">CodeForge</div>
             <div className="text-[10px] text-muted-foreground tracking-wide uppercase">Learn by building</div>
@@ -147,9 +146,7 @@ function Header({ onMenu }) {
         <Bell className="w-5 h-5" />
         <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary" />
       </Link>
-      <button className="p-2 rounded-md hover:bg-muted text-muted-foreground" aria-label="Toggle theme">
-        <Moon className="w-5 h-5" />
-      </button>
+
     </header>
   );
 }

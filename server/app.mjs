@@ -267,7 +267,7 @@ export function createApplication({ databasePath, databaseUrl, registrationEnabl
       let extension = extname(file);
       try { content = await readFile(file); }
       catch { if (extension) throw failure(404, 'Not found.'); content = await readFile(resolve(dist, 'index.html')); extension = '.html'; }
-      res.setHeader('Content-Type', ({ '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon' })[extension] || 'application/octet-stream');
+      res.setHeader('Content-Type', ({ '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.webmanifest': 'application/manifest+json' })[extension] || 'application/octet-stream');
       res.setHeader('Cache-Control', extension === '.html' ? 'no-cache' : 'public, max-age=3600');
       res.end(req.method === 'HEAD' ? undefined : content);
     } catch (error) {

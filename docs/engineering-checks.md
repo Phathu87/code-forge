@@ -25,3 +25,10 @@ Curriculum version 1.0.0 contains eight paths, 37 modules, 53 lesson units, 37 m
 All 22 automated tests, lint, type checking and the build passed. Curriculum checks cover reference validity, prerequisite cycles, generated-source consistency, database readback, SQLite restart persistence and rejection of changed content under an existing version. The project lifecycle suite also passed in an isolated PostgreSQL schema with curriculum migration/readback. The public task-manager behaviour suite has 11 checks but still needs an adapter to a real learner interface; its infrastructure-error tests are not learner assessment results.
 
 A disposable local browser account opened the curriculum, selected the JavaScript path, expanded a storage lesson and viewed the Persistent Developer Preferences requirements and public rubric. These checks do not establish full curriculum accessibility, assessment execution or public-release readiness. The build retains its bundle-size warning above 500 KB.
+
+## Brand system update — 2026-09-17
+
+The existing blue Code2 mark, dark palette and typography stacks were extracted into canonical assets and documented tokens. Landing, shell, auth and onboarding share the mark. The mint favicon, inactive theme control and admin identity's fake save/placeholder support address were corrected. The original exercise and published curriculum version remain unchanged.
+
+All 24 tests passed, including email HTML escaping, plain-text preservation, provider failure handling and safe reset links. Lint and type checking passed. Local browser review confirmed the landing layout and headline, canonical mark, authentication labels and visible input focus. The social image was visually inspected; all 33 manifest-listed assets exist and PNG dimensions were checked. Native candidates have not been tested in packages. No real email was sent by these tests and no full visual-parity or accessibility pass is claimed.
+The final production build passed; the existing bundle-size warning above 500 KB remains.

@@ -1,7 +1,8 @@
+import BrandMark from "@/components/BrandMark";
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  Code2, ArrowRight, Compass, ShieldCheck, Sparkles, CheckCircle2, Terminal,
+  ArrowRight, Compass, Sparkles, CheckCircle2, Terminal,
 } from "lucide-react";
 import LandingSections from "@/components/landing/LandingSections";
 
@@ -27,9 +28,7 @@ export default function Landing() {
       <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <Code2 className="w-5 h-5 text-primary-foreground" />
-            </div>
+            <BrandMark />
             <span className="font-heading font-semibold text-lg">CodeForge</span>
             <span className="hidden sm:inline text-[10px] uppercase tracking-wider text-muted-foreground border border-border rounded px-1.5 py-0.5">Preview</span>
           </Link>
@@ -59,7 +58,7 @@ export default function Landing() {
               <Sparkles className="w-3.5 h-3.5 text-primary" /> You write the code. We help you understand it.
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold leading-[1.05] tracking-tight">
-              Learn React.<br /><span className="text-primary">Build it yourself.</span>
+              Learn to build.<br /><span className="text-primary">Not prompt.</span>
             </h1>
             <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed max-w-md">
               Practise JavaScript and React through small coding exercises. Start with shared state, edit the code and save your work as you go.
@@ -86,7 +85,7 @@ export default function Landing() {
               <span className="w-3 h-3 rounded-full bg-warning/60" />
               <span className="w-3 h-3 rounded-full bg-success/60" />
               <span className="ml-3 text-xs text-muted-foreground font-mono">LanguageContext.jsx</span>
-              <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-success"><ShieldCheck className="w-3 h-3" /> Example exercise</span>
+              <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-success"><Terminal className="w-3 h-3" /> Example exercise</span>
             </div>
             <div className="flex">
               <div className="py-4 px-3 text-right text-xs font-mono text-muted-foreground/50 select-none border-r border-border bg-muted/20">
@@ -99,7 +98,7 @@ export default function Landing() {
               </pre>
             </div>
             <div className="flex items-center justify-between px-4 h-9 border-t border-border bg-muted/20 text-[11px] text-muted-foreground font-mono">
-              <span className="flex items-center gap-1.5"><Terminal className="w-3 h-3" /> JavaScript · Node</span>
+              <span className="flex items-center gap-1.5"><Terminal className="w-3 h-3" /> JavaScript · React</span>
               <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-success" /> Starter code</span>
             </div>
           </div>
@@ -126,9 +125,7 @@ export default function Landing() {
       <footer className="border-t border-border">
         <div className="max-w-6xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-              <Code2 className="w-4 h-4 text-primary-foreground" />
-            </div>
+            <BrandMark />
             <span className="font-heading font-semibold text-foreground">CodeForge</span>
             <span className="text-xs">· Development preview</span>
           </div>

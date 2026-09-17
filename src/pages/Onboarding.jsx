@@ -1,10 +1,11 @@
+import BrandMark from "@/components/BrandMark";
 import { api } from '@/api/client';
 import { useAuth } from '@/lib/AuthContext';
 import React, { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, ArrowRight, CheckCircle2, Search, Sparkles,
-  Code2, Circle, Clock, Target,
+  Circle, Clock, Target,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { technologies, experienceOptions, goalOptions, commitmentOptions, roadmapModules } from "@/lib/mockData";
@@ -57,9 +58,7 @@ export default function Onboarding() {
       <div className="w-full max-w-2xl">{error && <p role="alert" className="text-destructive mb-4">{error}</p>}
         <div className="flex items-center justify-between mb-4">
           <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-              <Code2 className="w-4 h-4 text-primary-foreground" />
-            </div>
+            <BrandMark />
             <span className="font-heading font-semibold text-foreground">CodeForge</span>
           </Link>
           <span className="text-xs text-muted-foreground">Step {step + 1} of 6 · {stepLabels[step]}</span>

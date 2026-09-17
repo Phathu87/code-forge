@@ -1,0 +1,55 @@
+@layer base {
+  :root {
+    --background: 222 20% 7%;
+    --foreground: 210 20% 94%;
+    --card: 222 18% 10%;
+    --card-foreground: 210 20% 94%;
+    --popover: 222 18% 12%;
+    --popover-foreground: 210 20% 94%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 222 20% 7%;
+    --secondary: 222 16% 14%;
+    --secondary-foreground: 210 20% 94%;
+    --muted: 222 16% 13%;
+    --muted-foreground: 215 16% 62%;
+    --accent: 199 80% 42%;
+    --accent-foreground: 210 20% 94%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 142 60% 48%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 55%;
+    --warning-foreground: 222 20% 7%;
+    --border: 222 16% 17%;
+    --input: 222 16% 17%;
+    --ring: 199 89% 48%;
+    --chart-1: 199 89% 48%;
+    --chart-2: 173 58% 45%;
+    --chart-3: 280 65% 60%;
+    --chart-4: 38 92% 55%;
+    --chart-5: 340 75% 60%;
+    --radius: 0.625rem;
+    --space-unit: 0.25rem;
+    --motion-fast: 0.2s;
+    --motion-enter: 0.4s;
+    --motion-ease: ease-out;
+    --code-background: 222 18% 10%;
+    --information: 199 89% 48%;
+    --layer-header: 20;
+    --layer-navigation: 40;
+    --layer-dialog: 50;
+    --font-heading: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --sidebar-background: 222 20% 8%;
+    --sidebar-foreground: 215 16% 62%;
+    --sidebar-primary: 199 89% 48%;
+    --sidebar-primary-foreground: 222 20% 7%;
+    --sidebar-accent: 222 16% 13%;
+    --sidebar-accent-foreground: 210 20% 94%;
+    --sidebar-border: 222 16% 16%;
+    --sidebar-ring: 199 89% 48%;
+  }
+}
+
